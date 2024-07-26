@@ -1,0 +1,77 @@
+/* Ensure header is fixed at the top and spans full width */
+.home-header {
+	position: fixed; /* Fix the header to the top */
+	top: 0;
+	left: 0;
+	width: 100%; /* Full width */
+	background-color: #f8f9fa; /* Background color */
+	padding: 20px; /* Padding */
+	color: #000; /* Text color */
+	border-bottom: 2px solid #ddd; /* Border at the bottom */
+	z-index: 1000; /* Ensure it's on top of other content */
+	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Optional shadow for better visibility */
+}
+
+/* Flexbox layout for the navigation bar */
+.navbar {
+	display: flex;
+	justify-content: space-between; /* Space between left and right sections */
+	align-items: center; /* Center items vertically */
+}
+
+/* Flexbox layout for the left side of the navbar */
+.navbar-left {
+	display: flex;
+	align-items: center; /* Center items vertically */
+}
+
+/* Margin for the business name */
+.business-name {
+	margin-left: 10px; /* Space between the logo and the business name */
+}
+
+/* Flexbox layout for the right side of the navbar */
+.navbar-right {
+	display: flex;
+	gap: 20px; /* Space between navigation items */
+	list-style: none; /* Remove default list styles */
+	margin: 1;
+	padding: 0;
+}
+
+/* Remove default list item margin */
+.navbar-right li {
+	margin-right: 30px;
+}
+
+/* Styling for navigation links */
+.navbar-right a {
+	text-decoration: none; /* Remove underline from links */
+	color: #000; /* Link color */
+}
+
+/* Underline on hover for links */
+.navbar-right a:hover {
+	text-decoration: underline;
+}
+
+/* Flexbox container for the main content to ensure it does not overlap the fixed header */
+.home-container {
+	display: flex;
+	flex-direction: column;
+	height: 100vh; /* Full viewport height */
+	margin-top: 80px; /* Adjust this value based on the height of your header */
+}
+
+/* Flexbox layout for list items */
+.list-item {
+	display: flex;
+	align-items: center; /* Center items vertically */
+}
+
+/* Styling for the logo */
+.logo {
+	width: 50px; /* Adjust size as needed */
+	height: auto; /* Maintain aspect ratio */
+	margin-right: 10px; /* Space between logo and text */
+}

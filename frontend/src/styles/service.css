@@ -1,0 +1,34 @@
+/* Center the entire section */
+.service-container {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	padding: 1px; /* Padding for spacing */
+}
+
+.additional-section {
+	text-align: center; /* Center text */
+	max-width: 1200px; /* Adjust width as needed */
+}
+
+.headingwhy {
+	font-size: 2rem; /* Adjust font size as needed */
+}
+
+.tagcolor {
+	color: orange; /* Adjust color as needed */
+}
+
+.service-cards {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 20px; /* Space between cards */
+	justify-content: center; /* Center cards horizontally */
+}
+
+.service-card {
+	border: 1px solid #ddd; /* Card border */
+	border-radius: 8px; /* Rounded corners */
+	padding: 10px; /* Padding inside card */
+	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Optional shadow */
+}
