@@ -1,19 +1,18 @@
-import React from "react";
-import { Link } from "react-router-dom";
-import ServiceOverview from "../components/service";
-const Home: React.FC = () => {
+import React from 'react';
+import '../styles/Home.css';
+import audi from "../images/audi.avif";
+
+const Home = () => {
 	return (
-		<div className="home-container">
-			<main className="home-main">
-				<section className="hero">
-					<h1>Welcome to 4Wheels Auto Collision Center</h1>
-					<p>Your trusted partner in vehicle repair and maintenance.</p>
-					<Link to="/login" className="btn">
-						Get Started
-					</Link>
-				</section>
-			</main>
-			<ServiceOverview />
+		<div className="home">
+			<div className="container">
+				<div className="box">
+					<h2>HELLO!</h2>
+					<h1>YOU HAD AN <span className="highlight">ACCIDENT?</span></h1>
+					<p>Give us a call. We’ll walk you through the process from start to finish and deal directly with the insurance companies so you don’t have to. At 4Wheels Auto Collision, your safety and satisfaction are our main priorities.</p>
+					<button className="btn">RESERVE APPOINTMENT</button>
+				</div>
+			</div>
 		</div>
 	);
 };
