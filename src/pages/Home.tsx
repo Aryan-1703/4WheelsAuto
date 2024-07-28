@@ -1,4 +1,4 @@
-import React from 'react';
+// import React from 'react';npm run deploy
 import '../styles/Home.css';
 
 const Home = () => {
