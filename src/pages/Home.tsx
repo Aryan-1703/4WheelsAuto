@@ -1,6 +1,5 @@
 import React from 'react';
 import '../styles/Home.css';
-import audi from "../images/audi.avif";
 
 const Home = () => {
 	return (
