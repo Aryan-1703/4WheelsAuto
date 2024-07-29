@@ -2,6 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import "../styles/Header.css";
 
+
 const Header: React.FC = () => {
 	return (
 		<header className="header">
@@ -31,6 +32,7 @@ const Header: React.FC = () => {
 				<div className="nav-container">
 					<nav className="nav-links">
 						<Link to="/">HOME</Link>
+						<Link to="/services">SERVICES</Link>
 						<Link to="/contact">CONTACT US</Link>
 					</nav>
 					<Link to="/appointment" className="make-appointment-btn">

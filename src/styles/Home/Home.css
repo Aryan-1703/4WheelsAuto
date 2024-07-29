@@ -1,7 +1,7 @@
 .home-start {
 	margin: 0;
 	font-family: Arial, sans-serif;
-	background: url("../images/audi.jpg") no-repeat center center;
+	background: url("/images/audi.jpg") no-repeat center center;
 	background-size: cover;
 	display: flex;
 	justify-content: center;

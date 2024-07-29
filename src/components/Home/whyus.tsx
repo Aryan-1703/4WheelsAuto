@@ -1,8 +1,8 @@
 import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCheckCircle } from "@fortawesome/free-solid-svg-icons";
-import "../styles/whyus.css";
-import bitown from "../images/bitown.jpg";
+import "../../styles/Home/whyus.css";
+import bitown from "/images/bitown.jpg";
 
 const Whyus = () => {
 	return (

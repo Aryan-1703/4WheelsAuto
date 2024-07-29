@@ -1,11 +1,35 @@
-html, body {
-    margin: 0; /* Remove default margin */
-    padding: 0; /* Remove default padding */
-    overflow-x: hidden;
+html,
+body {
+	margin: 0; /* Remove default margin */
+	padding: 0; /* Remove default padding */
+	height: 100%; /* Full height for HTML and body */
+	overflow-x: hidden; /* Prevent horizontal scroll */
+	display: flex;
+	flex-direction: column; /* Stack children vertically */
 }
-.home-footer{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color:aqua;
+
+.header {
+	background-color: #000;
+	color: white;
+	font-family: Arial, sans-serif;
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0; /* Adjust to full width */
+	z-index: 1000;
+	width: 100%; 
+}
+
+.main-content {
+	flex: 1; 
+	padding-top: 60px;
+}
+
+.home-footer {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	background-color: aqua;
+	width: 100%;
+	padding: 10px; 
 }

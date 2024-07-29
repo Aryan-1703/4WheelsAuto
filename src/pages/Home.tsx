@@ -1,10 +1,10 @@
 import React from "react";
-import ServiceOverview from "../components/ServiceOverview";
-import Appointment from "../components/appointment";
-import "../styles/Home.css";
-import Whyus from "../components/whyus";
-import Gallery from "../components/gallery";
-import Process from "../components/Process";
+import ServiceOverview from "../components/Home/ServiceOverview";
+import Appointment from "../components/Home/appointment";
+import "../styles/Home/Home.css";
+import Whyus from "../components/Home/whyus";
+import Gallery from "../components/Home/gallery";
+import Process from "../components/Home/Process";
 
 const Home = () => {
 	return (
