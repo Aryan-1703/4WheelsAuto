@@ -1,3 +1,4 @@
+/* service.css */
 .service-container {
 	display: flex;
 	flex-direction: column; /* Stack elements vertically */
@@ -6,12 +7,6 @@
 	text-align: center; /* Center text */
 	padding: 20px; /* Optional: Add some padding */
 	background-color: #efefef; /* Optional: Background color for visibility */
-}
-
-.service-container {
-	text-align: center; /* Center the text */
-	padding: 20px; /* Optional: Add some padding */
-	background-color: #ececec; /* Optional: Background color for visibility */
 }
 
 .service-container h1 {
@@ -50,6 +45,13 @@
 	text-align: center; /* Center the text inside the card */
 	padding: 20px; /* Padding inside the card */
 	transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth transition */
+	opacity: 0; /* Initially hidden */
+	transform: translateY(20px); /* Start slightly below */
+}
+
+.card-visible {
+	opacity: 1; /* Fully visible */
+	transform: translateY(0); /* Move to original position */
 }
 
 .card:hover {
@@ -75,4 +77,20 @@
 .card-desc {
 	font-size: 1rem;
 	color: #555;
+}
+
+/* Add keyframes for sliding animation */
+@keyframes slide-in {
+	from {
+		opacity: 0;
+		transform: translateY(80px);
+	}
+	to {
+		opacity: 1;
+		transform: translateY(0);
+	}
+}
+
+.card-visible {
+	animation: slide-in 0.8s ease-out;
 }

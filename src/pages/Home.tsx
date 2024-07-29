@@ -4,6 +4,7 @@ import Appointment from "../components/appointment";
 import "../styles/Home.css";
 import Whyus from "../components/whyus";
 import Gallery from "../components/gallery";
+import Process from "../components/Process";
 
 const Home = () => {
 	return (
@@ -28,6 +29,7 @@ const Home = () => {
 			<ServiceOverview />
 			<Appointment />
 			<Gallery />
+			<Process />
 		</div>
 	);
 };

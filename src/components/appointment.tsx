@@ -35,9 +35,15 @@ const Appointment: React.FC = () => {
 					unknown printer took a galley of type.
 				</p>
 				<p>
-					<span className="highlight">+1 (905) 457-8813</span>
+					<a href="tel:+19054578813" className="highlight">
+						+1 (905) 457-8813
+					</a>
 				</p>
-				<p>4WheelsAutoCollision.com</p>
+				<p>
+					<a href="mailto:4WheelsAutoCollision@domain.com" className="highlight">
+						4WheelsAutoCollision@domain.com
+					</a>
+				</p>
 				<h3>Opening Hours</h3>
 				<p>Monday - Friday: 9:00AM - 5:00PM</p>
 			</div>
