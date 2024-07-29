@@ -5,7 +5,7 @@ import "../styles/Header.css";
 const Header: React.FC = () => {
 	return (
 		<header className="header">
-			<div className="top-bar">
+			{/* <div className="top-bar">
 				<div className="contact-info">
 					<span>
 						<a href="tel:+19054578813">+1 (905) 457-8813</a>
@@ -20,7 +20,7 @@ const Header: React.FC = () => {
 				<div className="social-links">
 					<span>Mon - Fri 9:00 AM - 5:00 PM</span>
 				</div>
-			</div>
+			</div> */}
 			<div className="main-header">
 				<div className="company-name">
 					<div className="title">

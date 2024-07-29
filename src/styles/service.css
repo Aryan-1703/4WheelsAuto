@@ -1,34 +1,78 @@
-/* Center the entire section */
 .service-container {
 	display: flex;
-	justify-content: center;
-	align-items: center;
-	padding: 1px; /* Padding for spacing */
-}
-
-.additional-section {
+	flex-direction: column; /* Stack elements vertically */
+	justify-content: center; /* Center elements vertically */
+	align-items: center; /* Center elements horizontally */
 	text-align: center; /* Center text */
-	max-width: 1200px; /* Adjust width as needed */
+	padding: 20px; /* Optional: Add some padding */
+	background-color: #efefef; /* Optional: Background color for visibility */
 }
 
-.headingwhy {
-	font-size: 2rem; /* Adjust font size as needed */
+.service-container {
+	text-align: center; /* Center the text */
+	padding: 20px; /* Optional: Add some padding */
+	background-color: #ececec; /* Optional: Background color for visibility */
 }
 
-.tagcolor {
-	color: orange; /* Adjust color as needed */
+.service-container h1 {
+	margin-bottom: 10px;
+	font-size: 2rem;
 }
 
-.service-cards {
-	display: flex;
-	flex-wrap: wrap;
-	gap: 20px; /* Space between cards */
-	justify-content: center; /* Center cards horizontally */
+.service-container h3 {
+	position: relative; /* Enable positioning of the pseudo-element */
+	font-size: 1.5rem;
+	margin-bottom: 20px; /* Space below the h3 */
 }
 
-.service-card {
-	border: 1px solid #ddd; /* Card border */
+.service-container h3::after {
+	content: "";
+	display: block;
+	width: 100px; /* Width of the line */
+	height: 3px; /* Height of the line */
+	background-color: green; /* Color of the line */
+	margin: 10px auto 0; /* Margin to center the line and space it from the text */
+}
+
+.cards {
+	display: flex; /* Display the cards side by side */
+	justify-content: center; /* Center the cards horizontally */
+	gap: 20px; /* Space between the cards */
+	margin-top: 20px; /* Space above the cards */
+}
+
+.card {
+	background-color: white; /* Background color of the card */
 	border-radius: 8px; /* Rounded corners */
-	padding: 10px; /* Padding inside card */
-	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Optional shadow */
+	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Shadow for depth */
+	overflow: hidden; /* Ensure rounded corners for image */
+	width: 300px; /* Width of the card */
+	text-align: center; /* Center the text inside the card */
+	padding: 20px; /* Padding inside the card */
+	transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth transition */
+}
+
+.card:hover {
+	transform: scale(1.05); /* Slightly enlarge the card */
+	box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Enhance shadow on hover */
+}
+
+.card-img {
+	width: 100%; /* Full width image */
+	height: auto; /* Maintain aspect ratio */
+}
+
+.card-text {
+	padding: 10px;
+	font-size: 1.3rem;
+	color: #000000;
+	white-space: nowrap; /* Prevent line breaks */
+	overflow: hidden; /* Hide overflow text */
+	text-overflow: ellipsis; /* Add ellipsis (...) for overflow text */
+	margin-bottom: 10px; /* Space between text and description */
+}
+
+.card-desc {
+	font-size: 1rem;
+	color: #555;
 }

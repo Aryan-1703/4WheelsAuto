@@ -3,3 +3,9 @@ html, body {
     padding: 0; /* Remove default padding */
     overflow-x: hidden;
 }
+.home-footer{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color:aqua;
+}
