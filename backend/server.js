@@ -1,27 +1,33 @@
-// server.js (Node.js with Express)
-const express = require("express");
-const nodemailer = require("nodemailer");
-const bodyParser = require("body-parser");
+import express from "express";
+import nodemailer from "nodemailer";
+import bodyParser from "body-parser";
+import cors from "cors";
+import dotenv from "dotenv";
+
+dotenv.config(); // Load environment variables from .env file
 
 const app = express();
 app.use(bodyParser.json());
+app.use(cors());
 
 app.post("/api/send-email", async (req, res) => {
 	const { name, email, phone, date, service } = req.body;
 
 	const transporter = nodemailer.createTransport({
-		service: "gmail",
+		host: process.env.MAIL_HOST,
+		port: Number(process.env.MAIL_PORT),
+		secure: process.env.MAIL_SECURE === "true",
 		auth: {
-			user: "your-email@gmail.com",
-			pass: "your-email-password",
+			user: process.env.MAIL_USER,
+			pass: process.env.MAIL_PASS,
 		},
 	});
 
 	const mailOptions = {
-		from: "4WheelsAutoCollision.com",
-		to: "4WheelsAutoCollision@domain.com",
+		from: process.env.MAIL_USER,
+		to: "aryan17032@gmail.com",
 		subject: "New Appointment Request",
-		text: Name: ${name}\nEmail: ${email}\nPhone: ${phone}\nDate: ${date}\nService Needed: ${service},
+		text: `Name: ${name}\nEmail: ${email}\nPhone: ${phone}\nDate: ${date}\nService Needed: ${service}`,
 	};
 
 	try {
@@ -34,4 +40,4 @@ app.post("/api/send-email", async (req, res) => {
 });
 
 const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => console.log(Server running on port ${PORT}));
+app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
