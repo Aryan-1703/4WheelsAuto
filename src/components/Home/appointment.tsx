@@ -1,25 +1,34 @@
-import React, { useState } from "react";
-import "../../styles/Home/appointment.css";
+import React, { useState, ChangeEvent, FormEvent } from "react";
+import "../../styles/Home/apointment.css";
+
+// Define the type for form data
+interface FormData {
+	name: string;
+	email: string;
+	phone: string;
+	date: string;
+	service: string;
+}
 
 const Appointment: React.FC = () => {
-	const [name, setName] = useState("");
-	const [email, setEmail] = useState("");
-	const [phone, setPhone] = useState("");
-	const [date, setDate] = useState("");
-	const [service, setService] = useState("");
-	const [message, setMessage] = useState("");
+	// Initialize formData with the FormData type
+	const [formData, setFormData] = useState<FormData>({
+		name: "",
+		email: "",
+		phone: "",
+		date: "",
+		service: "",
+	});
 
-	const handleSubmit = async (e: React.FormEvent) => {
+	// Handle input changes
+	const handleChange = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+		const { name, value } = e.target;
+		setFormData(prevData => ({ ...prevData, [name]: value }));
+	};
+
+	// Handle form submission
+	const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
-
-		const formData = {
-			name,
-			email,
-			phone,
-			date,
-			service,
-		};
-
 		try {
 			const response = await fetch("/api/send-email", {
 				method: "POST",
@@ -28,15 +37,10 @@ const Appointment: React.FC = () => {
 				},
 				body: JSON.stringify(formData),
 			});
-
-			if (response.ok) {
-				setMessage("Your appointment request has been sent successfully!");
-			} else {
-				setMessage("There was an error sending your request. Please try again.");
-			}
+			const result = await response.text();
+			alert(result);
 		} catch (error) {
-			console.error("Error sending email:", error);
-			setMessage("There was an error sending your request. Please try again.");
+			console.error("Error:", error);
 		}
 	};
 
@@ -51,48 +55,47 @@ const Appointment: React.FC = () => {
 					<div className="form-row">
 						<input
 							type="text"
+							name="name"
 							placeholder="Name"
 							className="name-input"
-							value={name}
-							onChange={e => setName(e.target.value)}
-							required
+							value={formData.name}
+							onChange={handleChange}
 						/>
 						<input
 							type="email"
+							name="email"
 							placeholder="Email"
-							value={email}
-							onChange={e => setEmail(e.target.value)}
-							required
+							value={formData.email}
+							onChange={handleChange}
 						/>
 					</div>
 					<div className="form-row">
 						<input
 							type="text"
+							name="phone"
 							placeholder="Phone"
-							value={phone}
-							onChange={e => setPhone(e.target.value)}
-							required
+							value={formData.phone}
+							onChange={handleChange}
 						/>
 						<input
 							type="date"
+							name="date"
 							placeholder="Date"
-							value={date}
-							onChange={e => setDate(e.target.value)}
-							required
+							value={formData.date}
+							onChange={handleChange}
 						/>
 					</div>
 					<div className="input-container">
 						<textarea
 							id="service-input"
+							name="service"
 							placeholder="Service Needed"
-							value={service}
-							onChange={e => setService(e.target.value)}
-							required
+							value={formData.service}
+							onChange={handleChange}
 						></textarea>
 					</div>
 					<button type="submit">SEND MESSAGE</button>
 				</form>
-				{message && <p>{message}</p>}
 			</div>
 			<div className="appointment-card contact-card">
 				<h2>
@@ -122,4 +125,3 @@ const Appointment: React.FC = () => {
 };
 
 export default Appointment;
-	
