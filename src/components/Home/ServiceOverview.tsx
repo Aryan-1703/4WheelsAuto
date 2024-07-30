@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from "react";
 import "../../styles/Home/service.css";
-import tow from "/images/tow.png";
+import tow from "/public/images/tow.png";
 import heroservice from "/images/heroservice.jpg";
 import detailing from "/images/detailing.jpg";
 
