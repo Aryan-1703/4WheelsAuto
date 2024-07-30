@@ -1,0 +1,26 @@
+.service-cards {
+    display: flex;
+    flex-direction: column; /* Stack cards vertically */
+    align-items: center; /* Center cards horizontally */
+    gap: 20px; /* Space between cards */
+    position: relative; /* Ensure cards are positioned correctly */
+    z-index: 1; /* Ensure cards are above the overlay */
+}
+
+.service-card {
+    background: rgba(0, 0, 0, 0.7); /* Dark background for cards */
+    border-radius: 10px; /* Rounded corners for cards */
+    padding: 20px;
+    max-width: 300px; /* Limit service-card width */
+    color: #fff; /* Text color */
+}
+
+.service-card-text {
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+
+.service-card-desc {
+    font-size: 1rem;
+    margin-top: 10px; /* Space above the description */
+}

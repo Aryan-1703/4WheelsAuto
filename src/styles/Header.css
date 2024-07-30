@@ -1,0 +1,155 @@
+
+
+.contact-info {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.contact-info span {
+    margin-right: 15px;
+    margin-bottom: 5px;
+}
+
+.social-links {
+    display: flex;
+    align-items: center;
+}
+
+.social-links span {
+    margin-left: 15px;
+}
+
+.main-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 20px;
+}
+
+.company-name {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.title {
+    font-size: 2rem;
+    line-height: 1.2;
+    color: white;
+}
+
+.title span {
+    display: block;
+}
+
+.collision {
+    color: #ff5722;
+    font-size: 1.5rem;
+}
+
+.nav-container {
+    display: flex;
+    align-items: center;
+}
+
+.nav-links {
+    display: flex;
+    align-items: center;
+    margin-right: 20px;
+}
+
+.nav-links a {
+    color: white;
+    text-decoration: none;
+    margin: 0 15px;
+    font-size: 1rem;
+    transition: color 0.3s;
+}
+
+.nav-links a:hover {
+    color: #ff5722;
+}
+
+.make-appointment-btn {
+    background-color: transparent;
+    border: 1px solid white;
+    color: white;
+    padding: 10px 20px;
+    text-decoration: none;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.make-appointment-btn:hover {
+    background-color: transparent;
+    color: #ff5722;
+    border: 1px solid #ff5722;
+}
+
+/* Mobile Styles */
+@media (max-width: 768px) {
+    .top-bar {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .contact-info {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .contact-info span {
+        margin-right: 0;
+        margin-bottom: 5px;
+    }
+
+    .social-links {
+        margin-top: 10px;
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .social-links span {
+        margin-left: 0;
+        margin-bottom: 5px;
+    }
+
+    .nav-container {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .nav-links {
+        margin-right: 0;
+        margin-bottom: 10px;
+        flex-direction: column;
+    }
+
+    .nav-links a {
+        margin: 5px 0;
+    }
+
+    .make-appointment-btn {
+        width: 60%;
+        text-align: center;
+    }
+}
+
+@media (max-width: 480px) {
+    .title {
+        font-size: 1.5rem;
+    }
+
+    .collision {
+        font-size: 1.2rem;
+    }
+}
+
+.contact-info a {
+    color: white;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.contact-info a:hover {
+    color: #ff5722;
+}

@@ -1,0 +1,41 @@
+.gallery-container {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	text-align: center;
+	flex-direction: column;
+}
+.gallery-container h4 {
+	position: relative;
+	margin-bottom: 20px; /* Space below the h4 */
+	text-align: center; /* Center align text if needed */
+}
+
+.gallery-container h4::after {
+	content: "";
+	display: block;
+	width: 100px; /* Width of the line */
+	height: 3px; /* Height of the line */
+	background-color: green; /* Color of the line */
+	margin: 10px auto 0; /* Margin to center the line and space it from the text */
+}
+.image-grid {
+	display: grid;
+	grid-template-columns: repeat(4, 1fr); /* 4 equal-width columns */
+	gap: 10px; /* Space between images */
+	margin-top: 20px; /* Space above the grid */
+}
+
+.image-grid img {
+	width: 100%; /* Make images fill the grid cell */
+	height: 150px; /* Fixed height to ensure uniformity */
+	object-fit: cover; /* Cover the grid cell without stretching */
+	border-radius: 8px; /* Optional: Rounded corners for images */
+	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Optional: Shadow effect for images */
+	transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth transition for hover effect */
+}
+
+.image-grid img:hover {
+	transform: scale(1.1); /* Enlarge the image by 10% on hover */
+	box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3); /* Optional: Enhanced shadow effect on hover */
+}
