@@ -1,4 +1,3 @@
-import React from "react";
 import ServiceOverview from "../components/Home/ServiceOverview";
 import Appointment from "../components/Home/appointment";
 import "../styles/Home/Home.css";

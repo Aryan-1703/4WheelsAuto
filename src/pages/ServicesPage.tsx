@@ -1,4 +1,3 @@
-import React from "react";
 import "../styles/Services/index.css";
 import Cards from "../components/Service/Cards";
 
