@@ -288,7 +288,7 @@
 .home-start {
 	margin: 0;
 	font-family: Arial, sans-serif;
-	background: url(audi.jpg) no-repeat center center;
+	background: url(../images/audi.jpg) no-repeat center center;
 	background-size: cover;
 	display: flex;
 	justify-content: center;
@@ -458,7 +458,7 @@ h1 {
 .process-container {
 	margin-top: 100px;
 	font-family: Arial, sans-serif;
-	background: url(ocean.jpg) no-repeat;
+	background: url(../images/ocean.jpg) no-repeat;
 	clip-path: polygon(50% 0%, 100% 5%, 110% 100%, 0% 100%, 0% 5%);
 	background-size: cover;
 	display: flex;
@@ -569,7 +569,7 @@ h1 {
 }
 .services-container {
 	background: linear-gradient(#00000080, #00000080),
-		url(services.jpg) no-repeat center center;
+		url(../images/services.jpg) no-repeat center center;
 	margin: 0;
 	font-family: Arial, sans-serif;
 	flex-direction: column;
