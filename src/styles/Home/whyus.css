@@ -53,3 +53,77 @@
 	margin-right: 10px;
 	font-size: 1.2rem;
 }
+
+/* Media queries for responsive design */
+@media (max-width: 768px) {
+	.whyus-div {
+		flex-direction: column; /* Stack elements vertically on tablets */
+		margin: 20px; /* Adjust margin for tablets */
+	}
+
+	.img-box {
+		margin-bottom: 20px; /* Space between image and text on tablets */
+	}
+
+	.bitown-img {
+		max-width: 100%; /* Ensure image scales with the screen size */
+	}
+
+	.whyus-desc {
+		max-width: 100%; /* Full width on tablets */
+		text-align: center; /* Center text on tablets */
+	}
+
+	.whyus-desc h1 {
+		font-size: 1.5rem; /* Adjust font size for tablets */
+	}
+
+	.whyus-desc h3 {
+		font-size: 1.2rem; /* Adjust font size for tablets */
+	}
+
+	.whyus-desc p {
+		font-size: 1rem; /* Adjust font size for tablets */
+		line-height: 1.4; /* Adjust line height for tablets */
+	}
+}
+
+@media (max-width: 480px) {
+	.whyus-div {
+		margin: 10px; /* Adjust margin for mobile devices */
+	}
+
+	.img-box {
+		margin-bottom: 20px; /* Space between image and text on mobile */
+	}
+
+	.bitown-img {
+		max-width: 100%; /* Ensure image fits within mobile screens */
+	}
+
+	.whyus-desc {
+		max-width: 100%; /* Full width on mobile */
+		text-align: center; /* Center text on mobile */
+	}
+
+	.whyus-desc h1 {
+		font-size: 1.3rem; /* Further adjust font size for mobile */
+	}
+
+	.whyus-desc h3 {
+		font-size: 1rem; /* Further adjust font size for mobile */
+	}
+
+	.whyus-desc p {
+		font-size: 0.9rem; /* Further adjust font size for mobile */
+		line-height: 1.4; /* Adjust line height for better readability */
+	}
+
+	.checklist li {
+		font-size: 0.9rem; /* Adjust font size for mobile */
+	}
+
+	.check-icon {
+		font-size: 1rem; /* Adjust icon size for mobile */
+	}
+}
