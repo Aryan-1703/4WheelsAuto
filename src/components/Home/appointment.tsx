@@ -1,7 +1,6 @@
 import React, { useState, ChangeEvent, FormEvent } from "react";
-import "../../styles/Home/apointment.css";
+import "../../styles/Home/appointment.css"; // Corrected file name
 
-// Define the type for form data
 interface FormData {
 	name: string;
 	email: string;
@@ -11,7 +10,6 @@ interface FormData {
 }
 
 const Appointment: React.FC = () => {
-	// Initialize formData with the FormData type
 	const [formData, setFormData] = useState<FormData>({
 		name: "",
 		email: "",
@@ -20,15 +18,30 @@ const Appointment: React.FC = () => {
 		service: "",
 	});
 
-	// Handle input changes
+	const [isSubmitting, setIsSubmitting] = useState(false);
+	const [message, setMessage] = useState("");
+
 	const handleChange = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
 		const { name, value } = e.target;
 		setFormData(prevData => ({ ...prevData, [name]: value }));
 	};
 
-	// Handle form submission
+	const validateForm = () => {
+		const { name, email, phone, date, service } = formData;
+		if (!name || !email || !phone || !date || !service) {
+			setMessage("Please fill in all fields.");
+			return false;
+		}
+		return true;
+	};
+
 	const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
+		if (!validateForm()) return;
+
+		setIsSubmitting(true);
+		setMessage("");
+
 		try {
 			const response = await fetch("/api/send-email", {
 				method: "POST",
@@ -38,9 +51,12 @@ const Appointment: React.FC = () => {
 				body: JSON.stringify(formData),
 			});
 			const result = await response.text();
-			alert(result);
+			setMessage(result);
 		} catch (error) {
 			console.error("Error:", error);
+			setMessage("An error occurred. Please try again later.");
+		} finally {
+			setIsSubmitting(false);
 		}
 	};
 
@@ -51,6 +67,7 @@ const Appointment: React.FC = () => {
 					Schedule an <span className="highlight">Appointment</span>
 				</h2>
 				<p>Schedule an Appointment using the following form</p>
+				{message && <p className="message">{message}</p>}
 				<form onSubmit={handleSubmit}>
 					<div className="form-row">
 						<input
@@ -60,6 +77,7 @@ const Appointment: React.FC = () => {
 							className="name-input"
 							value={formData.name}
 							onChange={handleChange}
+							disabled={isSubmitting}
 						/>
 						<input
 							type="email"
@@ -67,6 +85,7 @@ const Appointment: React.FC = () => {
 							placeholder="Email"
 							value={formData.email}
 							onChange={handleChange}
+							disabled={isSubmitting}
 						/>
 					</div>
 					<div className="form-row">
@@ -76,6 +95,7 @@ const Appointment: React.FC = () => {
 							placeholder="Phone"
 							value={formData.phone}
 							onChange={handleChange}
+							disabled={isSubmitting}
 						/>
 						<input
 							type="date"
@@ -83,6 +103,7 @@ const Appointment: React.FC = () => {
 							placeholder="Date"
 							value={formData.date}
 							onChange={handleChange}
+							disabled={isSubmitting}
 						/>
 					</div>
 					<div className="input-container">
@@ -92,9 +113,12 @@ const Appointment: React.FC = () => {
 							placeholder="Service Needed"
 							value={formData.service}
 							onChange={handleChange}
+							disabled={isSubmitting}
 						></textarea>
 					</div>
-					<button type="submit">SEND MESSAGE</button>
+					<button type="submit" disabled={isSubmitting}>
+						{isSubmitting ? "Submitting..." : "SEND MESSAGE"}
+					</button>
 				</form>
 			</div>
 			<div className="appointment-card contact-card">
