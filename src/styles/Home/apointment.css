@@ -1,3 +1,4 @@
+/* General styles for appointment container */
 .appointment-container {
 	background: url("/images/carnight.jpg") no-repeat center center;
 	margin: 0;
@@ -44,13 +45,14 @@
 .form-row {
 	display: flex;
 	justify-content: space-between;
+	flex-wrap: wrap; /* Allow items to wrap on smaller screens */
 }
 
 .appointment-card input {
 	padding: 10px;
 	margin: 5px 0;
-	/* border-radius: 5px; */
-	width: 40%;
+	width: 100%; /* Full width for mobile screens */
+	box-sizing: border-box;
 }
 
 .appointment-card button {
@@ -77,6 +79,7 @@
 	margin-top: 20px;
 	font-size: 1.2rem;
 }
+
 .input-container {
 	position: relative;
 	width: 100%;
@@ -98,48 +101,136 @@
 	color: #aaa;
 	font-size: 16px;
 }
+
+/* Styles for the modal dialog */
 .dialog {
 	position: fixed;
 	top: 50%;
 	left: 50%;
 	transform: translate(-50%, -50%);
-	padding: 30px; /* Increased padding for a bigger box */
-	background-color: rgba(0, 0, 0); /* Black background with slight transparency */
+	padding: 20px; /* Adjusted padding */
+	background-color: rgba(
+		0,
+		0,
+		0,
+		0.9
+	); /* Slightly darker background for better contrast */
 	border: none;
 	border-radius: 10px;
-	box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.3);
+	box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4); /* More pronounced shadow */
 	z-index: 1000;
 	text-align: center;
-	font-size: 2em; /* Increased font size */
+	font-size: 1.5rem; /* Adjusted font size */
 	color: #fff; /* White text color */
 	opacity: 0;
 	animation: fadeIn 0.5s forwards; /* Smooth fade-in effect */
+	max-width: 90%; /* Responsive width */
+	max-height: 90%; /* Responsive height */
+	overflow: auto; /* Allow scrolling if content exceeds height */
 }
 
+/* Styles for the modal overlay */
 .dialog-overlay {
 	position: fixed;
 	top: 0;
 	left: 0;
 	width: 100%;
 	height: 100%;
-	background: rgba(0, 0, 0, 0.5);
+	background: rgba(0, 0, 0, 0.6); /* Slightly lighter background for better visibility */
 	z-index: 999;
 	opacity: 0;
 	animation: fadeInOverlay 0.5s forwards; /* Smooth fade-in effect */
 }
 
+/* Keyframes for fade-in effect */
 @keyframes fadeIn {
+	from {
+		opacity: 0;
+	}
 	to {
 		opacity: 1;
 	}
 }
 
 @keyframes fadeInOverlay {
+	from {
+		opacity: 0;
+	}
 	to {
 		opacity: 1;
 	}
 }
 
+/* Responsive adjustments for smaller screens */
+@media (max-width: 768px) {
+	.dialog {
+		max-width: 95%; /* Increase width for smaller screens */
+		padding: 15px; /* Adjust padding */
+		font-size: 1.2rem; /* Adjust font size */
+	}
+}
+
+@media (max-width: 480px) {
+	.dialog {
+		max-width: 95%; /* Increase width for very small screens */
+		padding: 10px; /* Adjust padding */
+		font-size: 1rem; /* Adjust font size */
+	}
+}
+
 .invalid {
 	border-color: red;
+}
+
+/* Media queries for mobile responsiveness */
+@media (max-width: 768px) {
+	.appointment-container {
+		height: auto; /* Allow height to adjust based on content */
+		padding: 20px; /* Add padding for smaller screens */
+		flex-direction: column; /* Stack cards vertically on smaller screens */
+	}
+
+	.appointment-card {
+		width: 90%; /* Increase card width for better fit on smaller screens */
+		margin: 10px auto; /* Center cards horizontally */
+	}
+
+	.form-row {
+		flex-direction: column; /* Stack input fields vertically on smaller screens */
+	}
+
+	.appointment-card input {
+		width: 100%; /* Full width for better fit on smaller screens */
+		margin-bottom: 10px; /* Space between input fields */
+	}
+
+	.appointment-card h2 {
+		font-size: 1.2rem; /* Adjust font size for smaller screens */
+	}
+
+	.appointment-card h3 {
+		font-size: 1rem; /* Adjust font size for smaller screens */
+	}
+
+	.appointment-card p {
+		font-size: 0.9rem; /* Adjust font size for smaller screens */
+	}
+}
+
+@media (max-width: 480px) {
+	.appointment-card {
+		width: 95%; /* Increase card width for very small screens */
+	}
+
+	.appointment-card h2 {
+		font-size: 1rem; /* Further adjust font size for very small screens */
+	}
+
+	.appointment-card h3 {
+		font-size: 0.9rem; /* Further adjust font size for very small screens */
+	}
+
+	.appointment-card p {
+		font-size: 0.8rem; /* Further adjust font size for very small screens */
+	}
 }
