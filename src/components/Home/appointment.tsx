@@ -52,7 +52,7 @@ const Appointment: React.FC = () => {
 
 		try {
 			const response = await axios.post(
-				"http://localhost:3001/api/send-email",
+				"https://4WheelsAutocollision.com/api/send-email",
 				formData,
 				{
 					headers: {
