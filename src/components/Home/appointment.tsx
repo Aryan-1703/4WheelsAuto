@@ -1,5 +1,6 @@
 import React, { useState, ChangeEvent, FormEvent } from "react";
-import "../../styles/Home/appointment.css"; // Corrected file name
+import axios from "axios";
+import "../../styles/Home/apointment.css";
 
 interface FormData {
 	name: string;
@@ -20,6 +21,8 @@ const Appointment: React.FC = () => {
 
 	const [isSubmitting, setIsSubmitting] = useState(false);
 	const [message, setMessage] = useState("");
+	const [showDialog, setShowDialog] = useState(false);
+	const [invalidFields, setInvalidFields] = useState<string[]>([]);
 
 	const handleChange = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
 		const { name, value } = e.target;
@@ -28,11 +31,16 @@ const Appointment: React.FC = () => {
 
 	const validateForm = () => {
 		const { name, email, phone, date, service } = formData;
-		if (!name || !email || !phone || !date || !service) {
-			setMessage("Please fill in all fields.");
-			return false;
-		}
-		return true;
+		const missingFields = [];
+		if (!name) missingFields.push("name");
+		if (!email) missingFields.push("email");
+		if (!phone) missingFields.push("phone");
+		if (!date) missingFields.push("date");
+		if (!service) missingFields.push("service");
+
+		setInvalidFields(missingFields);
+
+		return missingFields.length === 0;
 	};
 
 	const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
@@ -43,15 +51,24 @@ const Appointment: React.FC = () => {
 		setMessage("");
 
 		try {
-			const response = await fetch("/api/send-email", {
-				method: "POST",
-				headers: {
-					"Content-Type": "application/json",
-				},
-				body: JSON.stringify(formData),
-			});
-			const result = await response.text();
-			setMessage(result);
+			const response = await axios.post(
+				"http://localhost:3001/api/send-email",
+				formData,
+				{
+					headers: {
+						"Content-Type": "application/json",
+					},
+				}
+			);
+			setMessage(response.data);
+			setShowDialog(true);
+
+			// Hide dialog after 2 seconds
+			setTimeout(() => {
+				setShowDialog(false);
+				setFormData({ name: "", email: "", phone: "", date: "", service: "" });
+				setInvalidFields([]);
+			}, 3500);
 		} catch (error) {
 			console.error("Error:", error);
 			setMessage("An error occurred. Please try again later.");
@@ -74,7 +91,7 @@ const Appointment: React.FC = () => {
 							type="text"
 							name="name"
 							placeholder="Name"
-							className="name-input"
+							className={`name-input ${invalidFields.includes("name") ? "invalid" : ""}`}
 							value={formData.name}
 							onChange={handleChange}
 							disabled={isSubmitting}
@@ -83,6 +100,7 @@ const Appointment: React.FC = () => {
 							type="email"
 							name="email"
 							placeholder="Email"
+							className={invalidFields.includes("email") ? "invalid" : ""}
 							value={formData.email}
 							onChange={handleChange}
 							disabled={isSubmitting}
@@ -93,6 +111,7 @@ const Appointment: React.FC = () => {
 							type="text"
 							name="phone"
 							placeholder="Phone"
+							className={invalidFields.includes("phone") ? "invalid" : ""}
 							value={formData.phone}
 							onChange={handleChange}
 							disabled={isSubmitting}
@@ -101,6 +120,7 @@ const Appointment: React.FC = () => {
 							type="date"
 							name="date"
 							placeholder="Date"
+							className={invalidFields.includes("date") ? "invalid" : ""}
 							value={formData.date}
 							onChange={handleChange}
 							disabled={isSubmitting}
@@ -111,6 +131,7 @@ const Appointment: React.FC = () => {
 							id="service-input"
 							name="service"
 							placeholder="Service Needed"
+							className={invalidFields.includes("service") ? "invalid" : ""}
 							value={formData.service}
 							onChange={handleChange}
 							disabled={isSubmitting}
@@ -144,6 +165,18 @@ const Appointment: React.FC = () => {
 				<h3>Opening Hours</h3>
 				<p>Monday - Friday: 9:00AM - 5:00PM</p>
 			</div>
+			{showDialog && (
+				<>
+					<div className="dialog-overlay"></div>
+					<div className="dialog">
+						<p>
+							Thank you for your message. We have received your appointment request and
+							will get back to you as soon as possible.
+						</p>
+						<p>If you have any urgent questions, feel free to contact us directly.</p>
+					</div>
+				</>
+			)}
 		</div>
 	);
 };

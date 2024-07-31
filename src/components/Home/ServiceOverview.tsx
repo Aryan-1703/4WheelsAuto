@@ -1,8 +1,8 @@
 import React, { useEffect, useRef } from "react";
 import "../../styles/Home/service.css";
-import tow from "/dist/images/tow.png";
-import heroservice from "dist/images/heroservice.jpg";
-import detailing from "dist/images/detailing.jpg";
+import tow from "/images/tow.png";
+import heroservice from "/images/heroservice.jpg";
+import detailing from "/images/detailing.jpg";
 
 const ServiceOverview: React.FC = () => {
 	const cardsRef = useRef<HTMLDivElement>(null);

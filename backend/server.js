@@ -1,32 +1,27 @@
+import express from "express";
 import dotenv from "dotenv";
-import nodemailer from "nodemailer";
+import cors from "cors";
+import { sendEmail } from "./emailUtils.js";
 
-// Load environment variables
 dotenv.config();
 
-// Create a transporter object using the default SMTP transport
-const transporter = nodemailer.createTransport({
-	host: process.env.SMTP_HOST,
-	port: parseInt(process.env.SMTP_PORT || "465", 10),
-	secure: true, 
-	auth: {
-		user: process.env.SMTP_USER,
-		pass: process.env.SMTP_PASS,
-	},
+const app = express();
+app.use(express.json());
+app.use(cors());
+
+// Handle POST request to /api/send-email
+app.post("/api/send-email", async (req, res) => {
+	const { name, email, phone, date, service } = req.body;
+
+	try {
+		await sendEmail(name, email, phone, date, service);
+		res.send("Email sent successfully");
+	} catch (error) {
+		console.error("Error sending email:", error);
+		res.status(500).send("Error sending email");
+	}
 });
 
-const mailOptions = {
-	from: `"Aryan" <${process.env.SMTP_USER}>`, 
-	to: "atalpada@algomau.ca", 
-	subject: "Test Email", 
-	text: "Hello world?", 
-	html: "<b>Hello world?</b>", 
-};
-
-// Send email
-transporter.sendMail(mailOptions, (error, info) => {
-	if (error) {
-		return console.error("Error sending email:", error);
-	}
-	console.log("Message sent: %s", info.messageId);
+app.listen(3001, () => {
+	console.log("Server is running on port 3001");
 });
