@@ -9,10 +9,16 @@ dotenv.config();
 const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use(cors());
+app.use(
+	cors({
+		origin: "https://4wheelsautocollision.com", 
+	})
+);
 
+// Serve static files from the 'dist' folder
 app.use(express.static(path.join(__dirname, "dist")));
 
+// API endpoint for sending emails
 app.post("/api/send-email", async (req, res) => {
 	const { name, email, phone, date, service } = req.body;
 	try {
@@ -24,11 +30,13 @@ app.post("/api/send-email", async (req, res) => {
 	}
 });
 
+// Fallback route to serve the React app
 app.get("*", (req, res) => {
 	res.sendFile(path.join(__dirname, "dist", "index.html"));
 });
 
-const PORT = process.env.SMTP_PORT;
+// Set the port from environment variables or default to 3001
+const PORT = process.env.PORT || 3001;
 app.listen(PORT, () => {
 	console.log(`Server is running on port ${PORT}`);
 });
