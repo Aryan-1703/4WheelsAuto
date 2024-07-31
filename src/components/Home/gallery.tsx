@@ -1,4 +1,4 @@
-import React, { useState, useRef, MouseEvent } from "react";
+import React, { useState, useRef } from "react";
 import "../../styles/Home/gallery.css";
 
 const Gallery: React.FC = () => {
