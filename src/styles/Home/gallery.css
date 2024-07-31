@@ -1,41 +1,72 @@
+/* General Styles */
 .gallery-container {
 	display: flex;
 	align-items: center;
 	justify-content: center;
 	text-align: center;
 	flex-direction: column;
+	padding: 20px;
 }
+
 .gallery-container h4 {
 	position: relative;
-	margin-bottom: 20px; /* Space below the h4 */
-	text-align: center; /* Center align text if needed */
+	margin-bottom: 20px;
+	text-align: center;
 }
 
 .gallery-container h4::after {
 	content: "";
 	display: block;
-	width: 100px; /* Width of the line */
-	height: 3px; /* Height of the line */
-	background-color: green; /* Color of the line */
-	margin: 10px auto 0; /* Margin to center the line and space it from the text */
+	width: 100px;
+	height: 3px;
+	background-color: green;
+	margin: 10px auto 0;
 }
+
+/* Image Wrapper */
+.image-wrapper {
+	width: 100%;
+	overflow: hidden;
+}
+
 .image-grid {
-	display: grid;
-	grid-template-columns: repeat(4, 1fr); /* 4 equal-width columns */
-	gap: 10px; /* Space between images */
-	margin-top: 20px; /* Space above the grid */
+	display: flex;
+	flex-direction: row;
+	overflow-x: auto; /* Enable horizontal scrolling */
+	scroll-snap-type: x mandatory; /* Snap to images */
+	width: 100%;
 }
 
 .image-grid img {
-	width: 100%; /* Make images fill the grid cell */
-	height: 150px; /* Fixed height to ensure uniformity */
-	object-fit: cover; /* Cover the grid cell without stretching */
-	border-radius: 8px; /* Optional: Rounded corners for images */
-	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Optional: Shadow effect for images */
-	transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth transition for hover effect */
+	flex: 0 0 auto; /* Prevent images from shrinking */
+	width: 100vw; /* Full viewport width */
+	height: auto; /* Maintain aspect ratio */
+	object-fit: cover; /* Ensure proper fitting */
+	scroll-snap-align: center; /* Center image on scroll */
 }
 
-.image-grid img:hover {
-	transform: scale(1.1); /* Enlarge the image by 10% on hover */
-	box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3); /* Optional: Enhanced shadow effect on hover */
+/* Hide scrollbar for a cleaner look */
+.image-grid::-webkit-scrollbar {
+	display: none;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+	.gallery-container h4::after {
+		width: 80px; /* Adjust line width for tablets */
+	}
+
+	.image-grid img {
+		height: 200px; /* Adjust image height for tablets */
+	}
+}
+
+@media (max-width: 480px) {
+	.gallery-container h4::after {
+		width: 60px; /* Adjust line width for mobile */
+	}
+
+	.image-grid img {
+		height: 150px; /* Adjust image height for mobile */
+	}
 }
