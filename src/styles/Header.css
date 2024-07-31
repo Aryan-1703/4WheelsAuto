@@ -1,155 +1,218 @@
-
-
 .contact-info {
-    display: flex;
-    flex-wrap: wrap;
+	display: flex;
+	flex-wrap: wrap;
 }
 
 .contact-info span {
-    margin-right: 15px;
-    margin-bottom: 5px;
+	margin-right: 15px;
+	margin-bottom: 5px;
 }
 
 .social-links {
-    display: flex;
-    align-items: center;
+	display: flex;
+	align-items: center;
 }
 
 .social-links span {
-    margin-left: 15px;
+	margin-left: 15px;
 }
 
 .main-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 15px 20px;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding: 15px 20px;
 }
 
 .company-name {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
 }
 
 .title {
-    font-size: 2rem;
-    line-height: 1.2;
-    color: white;
+	font-size: 2rem;
+	line-height: 1.2;
+	color: white;
 }
 
 .title span {
-    display: block;
+	display: block;
 }
 
 .collision {
-    color: #ff5722;
-    font-size: 1.5rem;
+	color: #ff5722;
+	font-size: 1.5rem;
 }
 
 .nav-container {
-    display: flex;
-    align-items: center;
+	display: flex;
+	align-items: center;
 }
 
 .nav-links {
-    display: flex;
-    align-items: center;
-    margin-right: 20px;
+	display: flex;
+	align-items: center;
+	margin-right: 20px;
 }
 
 .nav-links a {
-    color: white;
-    text-decoration: none;
-    margin: 0 15px;
-    font-size: 1rem;
-    transition: color 0.3s;
+	color: white;
+	text-decoration: none;
+	margin: 0 15px;
+	font-size: 1rem;
+	transition: color 0.3s;
 }
 
 .nav-links a:hover {
-    color: #ff5722;
+	color: #ff5722;
 }
 
 .make-appointment-btn {
-    background-color: transparent;
-    border: 1px solid white;
-    color: white;
-    padding: 10px 20px;
-    text-decoration: none;
-    transition: background-color 0.3s, color 0.3s;
+	background-color: transparent;
+	border: 1px solid white;
+	color: white;
+	padding: 10px 20px;
+	text-decoration: none;
+	transition: background-color 0.3s, color 0.3s;
 }
 
 .make-appointment-btn:hover {
-    background-color: transparent;
-    color: #ff5722;
-    border: 1px solid #ff5722;
+	background-color: transparent;
+	color: #ff5722;
+	border: 1px solid #ff5722;
 }
 
 /* Mobile Styles */
 @media (max-width: 768px) {
-    .top-bar {
-        flex-direction: column;
-        align-items: flex-start;
-    }
+	.top-bar {
+		flex-direction: column;
+		align-items: flex-start;
+	}
 
-    .contact-info {
-        flex-direction: column;
-        align-items: flex-start;
-    }
+	.contact-info {
+		flex-direction: column;
+		align-items: flex-start;
+	}
 
-    .contact-info span {
-        margin-right: 0;
-        margin-bottom: 5px;
-    }
+	.contact-info span {
+		margin-right: 0;
+		margin-bottom: 5px;
+	}
 
-    .social-links {
-        margin-top: 10px;
-        flex-direction: column;
-        align-items: flex-start;
-    }
+	.social-links {
+		margin-top: 10px;
+		flex-direction: column;
+		align-items: flex-start;
+	}
 
-    .social-links span {
-        margin-left: 0;
-        margin-bottom: 5px;
-    }
+	.social-links span {
+		margin-left: 0;
+		margin-bottom: 5px;
+	}
 
-    .nav-container {
-        flex-direction: column;
-        align-items: flex-start;
-    }
+	.nav-container {
+		flex-direction: column;
+		align-items: flex-start;
+	}
 
-    .nav-links {
-        margin-right: 0;
-        margin-bottom: 10px;
-        flex-direction: column;
-    }
+	.nav-links {
+		margin-right: 0;
+		margin-bottom: 10px;
+		flex-direction: column;
+	}
 
-    .nav-links a {
-        margin: 5px 0;
-    }
+	.nav-links a {
+		margin: 5px 0;
+	}
 
-    .make-appointment-btn {
-        width: 60%;
-        text-align: center;
-    }
+	.make-appointment-btn {
+		width: 60%;
+		text-align: center;
+	}
 }
 
 @media (max-width: 480px) {
-    .title {
-        font-size: 1.5rem;
-    }
+	.title {
+		font-size: 1.5rem;
+	}
 
-    .collision {
-        font-size: 1.2rem;
-    }
+	.collision {
+		font-size: 1.2rem;
+	}
 }
 
 .contact-info a {
-    color: white;
-    text-decoration: none;
-    transition: color 0.3s;
+	color: white;
+	text-decoration: none;
+	transition: color 0.3s;
 }
 
 .contact-info a:hover {
-    color: #ff5722;
+	color: #ff5722;
+}
+/* Menu Toggle Button Styles */
+.menu-toggle {
+	display: none; /* Hidden by default */
+	background: transparent;
+	border: none;
+	color: white;
+	font-size: 1.5rem;
+	cursor: pointer;
+	z-index: 1001; /* Ensure it is above other content */
+	position: relative; /* Ensure it's positioned correctly */
+}
+
+/* Mobile Styles */
+@media (max-width: 768px) {
+	.nav-container {
+		position: relative; /* Positioning context for absolute child */
+	}
+
+	.menu-toggle {
+		display: block; /* Show the toggle button on small screens */
+		margin-left: auto; /* Align it to the right */
+	}
+
+	.nav-links {
+		display: none; /* Hide the links by default */
+		flex-direction: column;
+		width: 100%;
+		height: 100vh; /* Full viewport height */
+		position: fixed; /* Fixed position to cover the screen */
+		top: 0;
+		left: 0;
+		background-color: rgba(0, 0, 0, 0.9); /* Dark background for dropdown */
+		padding: 20px;
+		box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+		transition: transform 0.3s ease-in-out;
+		transform: translateY(-100%); /* Initially hide the menu above the viewport */
+		z-index: 1000; /* Ensure dropdown is above other content */
+	}
+
+	.nav-links.open {
+		display: flex; /* Show links when open */
+		transform: translateY(0); /* Slide down into view */
+	}
+
+	.nav-links a {
+		margin: 15px 0;
+		padding: 15px;
+		text-align: center;
+		color: white;
+		font-size: 1.5rem; /* Adjust font size for readability */
+		text-decoration: none;
+		transition: background-color 0.3s, color 0.3s;
+	}
+
+	.nav-links a:hover {
+		background-color: #ff5722;
+		color: white;
+	}
+
+	.make-appointment-btn {
+		margin-top: auto; /* Push button to the bottom of the menu */
+		padding: 15px 20px;
+		border: 1px solid white;
+	}
 }

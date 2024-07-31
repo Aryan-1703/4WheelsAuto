@@ -50,6 +50,34 @@
 	display: none;
 }
 
+/* Dots Indicator Styles */
+.dots-container {
+	display: flex;
+	justify-content: center;
+	margin-top: 10px;
+}
+
+.dot {
+	width: 10px;
+	height: 10px;
+	background-color: #ccc;
+	border-radius: 50%;
+	margin: 0 5px;
+	cursor: pointer;
+	transition: background-color 0.3s;
+}
+
+.dot.active {
+	background-color: #333;
+}
+
+/* Swipe Indicator Styles */
+.swipe-hint {
+	margin-top: 10px;
+	font-size: 0.9rem;
+	color: #666;
+}
+
 /* Responsive adjustments */
 @media (max-width: 768px) {
 	.gallery-container h4::after {
