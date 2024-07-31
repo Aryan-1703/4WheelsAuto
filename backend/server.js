@@ -24,12 +24,11 @@ app.post("/api/send-email", async (req, res) => {
 	}
 });
 
-
 app.get("*", (req, res) => {
 	res.sendFile(path.join(__dirname, "dist", "index.html"));
 });
 
-const PORT = process.env.SMTP_PORT ;
+const PORT = process.env.SMTP_PORT;
 app.listen(PORT, () => {
 	console.log(`Server is running on port ${PORT}`);
 });
