@@ -219,7 +219,7 @@
 
 @media (max-width: 480px) {
 	.appointment-card {
-		width: 95%; /* Increase card width for very small screens */
+		width: 90%; /* Increase card width for very small screens */
 	}
 
 	.appointment-card h2 {

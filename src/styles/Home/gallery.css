@@ -25,23 +25,61 @@
 
 /* Image Wrapper */
 .image-wrapper {
+	position: relative; /* Set to relative to position arrows within this container */
 	width: 100%;
 	overflow: hidden;
+	display: flex;
+	justify-content: center; /* Center the image */
+	align-items: center; /* Center the image vertically if needed */
 }
 
+/* Image Grid */
 .image-grid {
+	position: relative; /* Set to relative for arrow positioning */
 	display: flex;
 	flex-direction: row;
 	overflow-x: auto; /* Enable horizontal scrolling */
 	scroll-snap-type: x mandatory; /* Snap to images */
-	width: 100%;
+	width: 50vw; /* 50% of the viewport width */
+	margin: 0 auto; /* Center the image grid */
+	justify-content: center; /* Center the images in the grid */
 }
 
+.arrow {
+	position: absolute; /* Position arrows absolutely within the image-wrapper */
+	top: 50%; /* Position arrows at the vertical center */
+	transform: translateY(-50%); /* Center the arrows vertically */
+	background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+	color: white; /* Arrow color */
+	border: none; /* Remove border */
+	border-radius: 50%; /* Make arrows circular */
+	width: 30px; /* Arrow button width */
+	height: 30px; /* Arrow button height */
+	display: flex; /* Flexbox for centering arrow icon */
+	justify-content: center; /* Center icon horizontally */
+	align-items: center; /* Center icon vertically */
+	cursor: pointer; /* Pointer cursor on hover */
+	font-size: 1.5rem; /* Increase font size for better visibility */
+	z-index: 1; /* Ensure arrows are above other content */
+}
+
+/* Left Arrow */
+.arrow-left {
+	left: 10px; /* Position left arrow */
+}
+
+/* Right Arrow */
+.arrow-right {
+	right: 10px; /* Position right arrow */
+}
+
+/* Image Grid Images */
 .image-grid img {
 	flex: 0 0 auto; /* Prevent images from shrinking */
-	width: 100vw; /* Full viewport width */
-	height: auto; /* Maintain aspect ratio */
-	object-fit: cover; /* Ensure proper fitting */
+	width: 100%; /* Full width of the container */
+	height: 500px; /* Set a fixed height for all images */
+	object-fit: cover; /* Scale and crop the image to fill the given dimensions */
+	object-position: center; /* Center the image if it's being cropped */
 	scroll-snap-align: center; /* Center image on scroll */
 }
 
@@ -79,13 +117,19 @@
 }
 
 /* Responsive adjustments */
+
 @media (max-width: 768px) {
-	.gallery-container h4::after {
-		width: 80px; /* Adjust line width for tablets */
+	.arrow {
+		display: none; /* Hide arrows on screens smaller than 768px */
+	}
+
+	.image-grid {
+		width: 100vw; /* Full viewport width on mobile */
 	}
 
 	.image-grid img {
-		height: 200px; /* Adjust image height for tablets */
+		height: auto; /* Adjust height automatically to fit the width */
+		width: 100%; /* Full width of the container */
 	}
 }
 
@@ -95,6 +139,6 @@
 	}
 
 	.image-grid img {
-		height: 150px; /* Adjust image height for mobile */
+		height: 200px; /* Adjust image height for mobile */
 	}
 }

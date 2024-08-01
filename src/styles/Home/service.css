@@ -158,6 +158,6 @@
 	}
 	.card {
 		display: inline-block; /* Allow cards to be swiped */
-		width: 100%; /* Ensure cards take full width */
+		width: 90%; /* Ensure cards take full width */
 	}
 }
