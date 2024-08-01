@@ -34,6 +34,7 @@
 	justify-content: center; /* Center the cards horizontally */
 	gap: 20px; /* Space between the cards */
 	margin-top: 20px; /* Space above the cards */
+	flex-wrap: wrap; /* Allow wrapping on smaller screens */
 }
 
 .card {
@@ -93,4 +94,70 @@
 
 .card-visible {
 	animation: slide-in 0.8s ease-out;
+}
+
+/* Media queries for responsive design */
+@media (max-width: 768px) {
+	.service-container {
+		padding: 15px; /* Reduce padding for tablets */
+	}
+
+	.service-container h1 {
+		font-size: 1.8rem; /* Adjust font size for tablets */
+	}
+
+	.service-container h3 {
+		font-size: 1.3rem; /* Adjust font size for tablets */
+	}
+
+	.cards {
+		flex-direction: column; /* Stack cards vertically on tablets */
+	}
+
+	.card {
+		width: 100%; /* Full width for cards on tablets */
+		margin-bottom: 20px; /* Space between cards */
+	}
+}
+
+@media (max-width: 480px) {
+	.service-container {
+		padding: 10px; /* Further reduce padding for mobile devices */
+	}
+
+	.service-container h1 {
+		font-size: 1.5rem; /* Further adjust font size for mobile */
+	}
+
+	.service-container h3 {
+		font-size: 1.2rem; /* Further adjust font size for mobile */
+	}
+
+	.cards {
+		flex-direction: column; /* Stack cards vertically on mobile */
+	}
+
+	.card {
+		width: 100%; /* Full width for cards on mobile */
+		margin-bottom: 15px; /* Space between cards */
+	}
+
+	.card-text {
+		font-size: 1.2rem; /* Adjust font size for mobile */
+	}
+
+	.card-desc {
+		font-size: 0.9rem; /* Adjust font size for mobile */
+	}
+}
+
+/* Add swipe support for mobile */
+@media (max-width: 480px) {
+	.cards {
+		display: block; /* Display cards as block elements for swipe support */
+	}
+	.card {
+		display: inline-block; /* Allow cards to be swiped */
+		width: 90%; /* Ensure cards take full width */
+	}
 }

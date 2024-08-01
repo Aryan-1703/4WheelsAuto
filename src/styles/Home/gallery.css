@@ -1,41 +1,144 @@
+/* General Styles */
 .gallery-container {
 	display: flex;
 	align-items: center;
 	justify-content: center;
 	text-align: center;
 	flex-direction: column;
+	padding: 20px;
 }
+
 .gallery-container h4 {
 	position: relative;
-	margin-bottom: 20px; /* Space below the h4 */
-	text-align: center; /* Center align text if needed */
+	margin-bottom: 20px;
+	text-align: center;
 }
 
 .gallery-container h4::after {
 	content: "";
 	display: block;
-	width: 100px; /* Width of the line */
-	height: 3px; /* Height of the line */
-	background-color: green; /* Color of the line */
-	margin: 10px auto 0; /* Margin to center the line and space it from the text */
+	width: 100px;
+	height: 3px;
+	background-color: green;
+	margin: 10px auto 0;
 }
+
+/* Image Wrapper */
+.image-wrapper {
+	position: relative; /* Set to relative to position arrows within this container */
+	width: 100%;
+	overflow: hidden;
+	display: flex;
+	justify-content: center; /* Center the image */
+	align-items: center; /* Center the image vertically if needed */
+}
+
+/* Image Grid */
 .image-grid {
-	display: grid;
-	grid-template-columns: repeat(4, 1fr); /* 4 equal-width columns */
-	gap: 10px; /* Space between images */
-	margin-top: 20px; /* Space above the grid */
+	position: relative; /* Set to relative for arrow positioning */
+	display: flex;
+	flex-direction: row;
+	overflow-x: auto; /* Enable horizontal scrolling */
+	scroll-snap-type: x mandatory; /* Snap to images */
+	width: 50vw; /* 50% of the viewport width */
+	margin: 0 auto; /* Center the image grid */
+	justify-content: center; /* Center the images in the grid */
 }
 
+.arrow {
+	position: absolute; /* Position arrows absolutely within the image-wrapper */
+	top: 50%; /* Position arrows at the vertical center */
+	transform: translateY(-50%); /* Center the arrows vertically */
+	background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+	color: white; /* Arrow color */
+	border: none; /* Remove border */
+	border-radius: 50%; /* Make arrows circular */
+	width: 30px; /* Arrow button width */
+	height: 30px; /* Arrow button height */
+	display: flex; /* Flexbox for centering arrow icon */
+	justify-content: center; /* Center icon horizontally */
+	align-items: center; /* Center icon vertically */
+	cursor: pointer; /* Pointer cursor on hover */
+	font-size: 1.5rem; /* Increase font size for better visibility */
+	z-index: 1; /* Ensure arrows are above other content */
+}
+
+/* Left Arrow */
+.arrow-left {
+	left: 10px; /* Position left arrow */
+}
+
+/* Right Arrow */
+.arrow-right {
+	right: 10px; /* Position right arrow */
+}
+
+/* Image Grid Images */
 .image-grid img {
-	width: 100%; /* Make images fill the grid cell */
-	height: 150px; /* Fixed height to ensure uniformity */
-	object-fit: cover; /* Cover the grid cell without stretching */
-	border-radius: 8px; /* Optional: Rounded corners for images */
-	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Optional: Shadow effect for images */
-	transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth transition for hover effect */
+	flex: 0 0 auto; /* Prevent images from shrinking */
+	width: 100%; /* Full width of the container */
+	height: 500px; /* Set a fixed height for all images */
+	object-fit: cover; /* Scale and crop the image to fill the given dimensions */
+	object-position: center; /* Center the image if it's being cropped */
+	scroll-snap-align: center; /* Center image on scroll */
 }
 
-.image-grid img:hover {
-	transform: scale(1.1); /* Enlarge the image by 10% on hover */
-	box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3); /* Optional: Enhanced shadow effect on hover */
+/* Hide scrollbar for a cleaner look */
+.image-grid::-webkit-scrollbar {
+	display: none;
+}
+
+/* Dots Indicator Styles */
+.dots-container {
+	display: flex;
+	justify-content: center;
+	margin-top: 10px;
+}
+
+.dot {
+	width: 10px;
+	height: 10px;
+	background-color: #ccc;
+	border-radius: 50%;
+	margin: 0 5px;
+	cursor: pointer;
+	transition: background-color 0.3s;
+}
+
+.dot.active {
+	background-color: #333;
+}
+
+/* Swipe Indicator Styles */
+.swipe-hint {
+	margin-top: 10px;
+	font-size: 0.9rem;
+	color: #666;
+}
+
+/* Responsive adjustments */
+
+@media (max-width: 768px) {
+	.arrow {
+		display: none; /* Hide arrows on screens smaller than 768px */
+	}
+
+	.image-grid {
+		width: 100vw; /* Full viewport width on mobile */
+	}
+
+	.image-grid img {
+		height: auto; /* Adjust height automatically to fit the width */
+		width: 100%; /* Full width of the container */
+	}
+}
+
+@media (max-width: 480px) {
+	.gallery-container h4::after {
+		width: 60px; /* Adjust line width for mobile */
+	}
+
+	.image-grid img {
+		height: 200px; /* Adjust image height for mobile */
+	}
 }
