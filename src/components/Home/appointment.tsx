@@ -1,4 +1,5 @@
-import React, { useState, ChangeEvent, FormEvent } from "react";
+import React from "react";
+import { useForm, SubmitHandler } from "react-hook-form";
 import axios from "axios";
 import "../../styles/Home/apointment.css";
 
@@ -11,49 +12,18 @@ interface FormData {
 }
 
 const Appointment: React.FC = () => {
-	const [formData, setFormData] = useState<FormData>({
-		name: "",
-		email: "",
-		phone: "",
-		date: "",
-		service: "",
-	});
+	const {
+		register,
+		handleSubmit,
+		formState: { errors, isSubmitting },
+		reset,
+	} = useForm<FormData>();
 
-	const [isSubmitting, setIsSubmitting] = useState(false);
-	const [message, setMessage] = useState("");
-	const [showDialog, setShowDialog] = useState(false);
-	const [invalidFields, setInvalidFields] = useState<string[]>([]);
-
-	const handleChange = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-		const { name, value } = e.target;
-		setFormData(prevData => ({ ...prevData, [name]: value }));
-	};
-
-	const validateForm = () => {
-		const { name, email, phone, date, service } = formData;
-		const missingFields = [];
-		if (!name) missingFields.push("name");
-		if (!email) missingFields.push("email");
-		if (!phone) missingFields.push("phone");
-		if (!date) missingFields.push("date");
-		if (!service) missingFields.push("service");
-
-		setInvalidFields(missingFields);
-
-		return missingFields.length === 0;
-	};
-
-	const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
-		e.preventDefault();
-		if (!validateForm()) return;
-
-		setIsSubmitting(true);
-		setMessage("");
-
+	const onSubmit: SubmitHandler<FormData> = async data => {
 		try {
 			const response = await axios.post(
 				"https://4wheelsautocollision.com/backend/api/send-email",
-				formData,
+				data,
 				{
 					headers: {
 						"Content-Type": "application/json",
@@ -66,76 +36,79 @@ const Appointment: React.FC = () => {
 			// Hide dialog after 2 seconds
 			setTimeout(() => {
 				setShowDialog(false);
-				setFormData({ name: "", email: "", phone: "", date: "", service: "" });
-				setInvalidFields([]);
+				reset();
 			}, 3500);
 		} catch (error) {
 			console.error("Error:", error);
 			setMessage("An error occurred. Please try again later.");
-		} finally {
-			setIsSubmitting(false);
 		}
 	};
+
+	const [message, setMessage] = React.useState("");
+	const [showDialog, setShowDialog] = React.useState(false);
 
 	return (
 		<div className="appointment-container">
 			<div className="appointment-card form-card">
 				<h2>
-					Schedule an <span className="highlight">Appointment</span>
+					Request an <span className="highlight">Appointment</span>
 				</h2>
-				<p>Schedule an Appointment using the following form</p>
+				<p>Request an Appointment using the following form</p>
 				{message && <p className="message">{message}</p>}
-				<form onSubmit={handleSubmit}>
+				<form onSubmit={handleSubmit(onSubmit)}>
 					<div className="form-row">
 						<input
 							type="text"
-							name="name"
+							{...register("name", { required: "Name is required" })}
 							placeholder="Name"
-							className={`name-input ${invalidFields.includes("name") ? "invalid" : ""}`}
-							value={formData.name}
-							onChange={handleChange}
-							disabled={isSubmitting}
+							className={`name-input ${errors.name ? "invalid" : ""}`}
 						/>
+						{errors.name && <span className="error-message">{errors.name.message}</span>}
+
 						<input
 							type="email"
-							name="email"
+							{...register("email", {
+								required: "Email is required",
+								pattern: {
+									value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
+									message: "Invalid email address",
+								},
+							})}
 							placeholder="Email"
-							className={invalidFields.includes("email") ? "invalid" : ""}
-							value={formData.email}
-							onChange={handleChange}
-							disabled={isSubmitting}
+							className={`email-input ${errors.email ? "invalid" : ""}`}
 						/>
+						{errors.email && (
+							<span className="error-message">{errors.email.message}</span>
+						)}
 					</div>
 					<div className="form-row">
 						<input
 							type="text"
-							name="phone"
+							{...register("phone", { required: "Phone number is required" })}
 							placeholder="Phone"
-							className={invalidFields.includes("phone") ? "invalid" : ""}
-							value={formData.phone}
-							onChange={handleChange}
-							disabled={isSubmitting}
+							className={`phone-input ${errors.phone ? "invalid" : ""}`}
 						/>
+						{errors.phone && (
+							<span className="error-message">{errors.phone.message}</span>
+						)}
+
 						<input
 							type="date"
-							name="date"
+							{...register("date", { required: "Date is required" })}
 							placeholder="Date"
-							className={invalidFields.includes("date") ? "invalid" : ""}
-							value={formData.date}
-							onChange={handleChange}
-							disabled={isSubmitting}
+							className={`date-input ${errors.date ? "invalid" : ""}`}
 						/>
+						{errors.date && <span className="error-message">{errors.date.message}</span>}
 					</div>
 					<div className="input-container">
 						<textarea
-							id="service-input"
-							name="service"
+							{...register("service", { required: "Service needed is required" })}
 							placeholder="Service Needed"
-							className={invalidFields.includes("service") ? "invalid" : ""}
-							value={formData.service}
-							onChange={handleChange}
-							disabled={isSubmitting}
+							className={`service-input ${errors.service ? "invalid" : ""}`}
 						></textarea>
+						{errors.service && (
+							<span className="error-message">{errors.service.message}</span>
+						)}
 					</div>
 					<button type="submit" disabled={isSubmitting}>
 						{isSubmitting ? "Submitting..." : "SEND MESSAGE"}
@@ -146,12 +119,14 @@ const Appointment: React.FC = () => {
 				<h2>
 					Make a <span className="highlight">Phone Call</span>
 				</h2>
-				<p>Schedule an Appointment using the following phone number</p>
 				<p>
-					Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem
-					Ipsum has been the industry's standard dummy text ever since the 1500s, when an
-					unknown printer took a galley of type.
+					At 4Wheels Auto Collision, we are here to assist you with scheduling your
+					vehicle repair or collision repair services. Call us today to speak with one of
+					our friendly team members who will help you set up a convenient appointment
+					time. We look forward to helping you get your vehicle back on the road.
 				</p>
+				<br />
+				<p>To request an appointment, please call us at:</p>
 				<p>
 					<a href="tel:+19054578813" className="highlight">
 						+1 (905) 457-8813
@@ -163,7 +138,7 @@ const Appointment: React.FC = () => {
 					</a>
 				</p>
 				<h3>Opening Hours</h3>
-				<p>Monday - Friday: 9:00AM - 5:00PM</p>
+				<p>Monday - Friday: 9:00 AM - 5:00 PM</p>
 			</div>
 			{showDialog && (
 				<>
