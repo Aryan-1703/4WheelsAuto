@@ -15,9 +15,6 @@ app.use(
 	})
 );
 
-// Serve static files from the 'dist' folder
-app.use(express.static(path.join(__dirname, "dist")));
-
 // API endpoint for sending emails
 app.post("/api/send-email", async (req, res) => {
 	const { name, email, phone, date, service } = req.body;
