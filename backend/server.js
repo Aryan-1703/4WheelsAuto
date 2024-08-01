@@ -2,7 +2,7 @@ import express from "express";
 import path from "path";
 import dotenv from "dotenv";
 import cors from "cors";
-import { sendEmail } from "./emailUtils.js";
+import { sendEmail } from "./emailUtils.js"; // Ensure this file and function exist
 
 dotenv.config();
 
@@ -11,7 +11,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(
 	cors({
-		origin: "https://4wheelsautocollision.com", 
+		origin: "https://4wheelsautocollision.com",
 	})
 );
 
