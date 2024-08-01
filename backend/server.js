@@ -2,7 +2,7 @@ import express from "express";
 import path from "path";
 import dotenv from "dotenv";
 import cors from "cors";
-import { sendEmail } from "./emailUtils.js"; // Ensure this file and function exist
+import sendEmail from "sendEmail";
 
 dotenv.config();
 
@@ -16,7 +16,7 @@ app.use(
 );
 
 // API endpoint for sending emails
-app.post("/api/send-email", async (req, res) => {
+app.post("/backend/api/send-email", async (req, res) => {
 	const { name, email, phone, date, service } = req.body;
 	try {
 		await sendEmail(name, email, phone, date, service);
@@ -27,9 +27,13 @@ app.post("/api/send-email", async (req, res) => {
 	}
 });
 
-// Fallback route to serve the React app
+// Serve static files from the public_html directory
+const publicPath = path.join(__dirname, "..", "public_html");
+app.use(express.static(publicPath));
+
+// Serve the main index.html file for any non-API route
 app.get("*", (req, res) => {
-	res.sendFile(path.join(__dirname, "dist", "index.html"));
+	res.sendFile(path.join(publicPath, "index.html"));
 });
 
 // Set the port from environment variables or default to 3001
