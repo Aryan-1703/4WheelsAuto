@@ -16,7 +16,7 @@ const transporter = nodemailer.createTransport({
 export const sendEmail = (name, email, phone, date, service) => {
 	const mailOptions = {
 		from: `"Appointment" <${process.env.SMTP_USER}>`,
-		to: "fourwheelsauto@hotmail.com",
+		to: "aryan17032@gmail.com",
 		subject: `Appointment Request from ${name}`,
 		text: `You have received a new appointment request from ${name}.\n\nDetails:\nName: ${name}\nEmail: ${email}\nPhone: ${phone}\nDate: ${date}\nService: ${service}\n\nTo contact them, you can reply directly to this email.`,
 		html: `
