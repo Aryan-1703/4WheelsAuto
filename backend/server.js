@@ -2,7 +2,7 @@ import express from "express";
 import path from "path";
 import dotenv from "dotenv";
 import cors from "cors";
-import {sendEmail} from "./emailUtils.js";
+import { sendEmail } from "./emailUtils.js";
 
 dotenv.config();
 
