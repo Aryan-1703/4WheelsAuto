@@ -175,24 +175,25 @@
 	}
 
 	.nav-links {
-		display: none; /* Hide the links by default */
+		display: flex; /* Use flexbox for alignment */
 		flex-direction: column;
-		width: 100%;
+		width: 80%; /* Width of the sliding menu */
 		height: 100vh; /* Full viewport height */
 		position: fixed; /* Fixed position to cover the screen */
 		top: 0;
-		left: 0;
+		right: 0; /* Align to the right */
 		background-color: rgba(0, 0, 0, 0.9); /* Dark background for dropdown */
 		padding: 20px;
 		box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 		transition: transform 0.3s ease-in-out;
-		transform: translateY(-100%); /* Initially hide the menu above the viewport */
+		transform: translateX(100%); /* Initially hide the menu off-screen */
 		z-index: 1000; /* Ensure dropdown is above other content */
+		justify-content: center; /* Center items vertically */
+		align-items: center; /* Center items horizontally */
 	}
 
 	.nav-links.open {
-		display: flex; /* Show links when open */
-		transform: translateY(0); /* Slide down into view */
+		transform: translateX(0); /* Slide in from the right */
 	}
 
 	.nav-links a {

@@ -33,7 +33,7 @@ const Header: React.FC = () => {
 							CONTACT US
 						</Link>
 						<Link
-							to="/appointment"
+							to="/appointment-request" 
 							className="make-appointment-btn"
 							onClick={() => setIsMenuOpen(false)}
 						>

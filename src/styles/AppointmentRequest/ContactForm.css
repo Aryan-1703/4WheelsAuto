@@ -1,0 +1,76 @@
+/* Default styles for larger screens */
+.contact-form {
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f3f3f3;
+    margin-top: 20px;
+}
+
+.input-group {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+    margin-bottom: 15px;
+}
+
+.input-group input {
+    flex: 1;
+}
+
+input, textarea, button {
+    width: 95%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+textarea {
+    height: 100px;
+}
+
+button {
+    background-color: #00a1e0;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+}
+
+button:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+}
+
+.error {
+    color: red;
+    font-size: 12px;
+    margin-top: -10px;
+    margin-bottom: 10px;
+}
+
+/* Mobile styles */
+@media (max-width: 768px) {
+    .contact-form {
+        padding: 10px;
+        margin-top: 10px;
+        width:400px;
+    }
+
+    .input-group {
+        flex-direction: column;
+        gap: 0;
+    }
+
+    .input-group input {
+        margin-bottom: 10px;
+    }
+
+    textarea {
+        height: 80px;
+    }
+
+    .error {
+        font-size: 10px;
+        margin-top: -5px;
+    }
+}

@@ -1,0 +1,76 @@
+/* Default styles for larger screens */
+.container-head {
+    font-size: 1.5em;
+    display: flex;
+    margin-top: 40px;
+    justify-content: center;
+    align-items: center;
+    color: rgb(97, 97, 97);
+}
+
+.contact-info {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    text-align: center;
+    padding: 20px;
+    border-top: 1px solid #ccc;
+    border-bottom: 1px solid #ccc;
+    background-color: #f9f9f9;
+    margin-top: 40px;
+}
+
+.info-block {
+    flex: 1;
+    padding: 0 20px;
+}
+
+.info-block i {
+    display: block;
+    font-size: 30px;
+    margin-bottom: 10px;
+    color: #00a1e0;
+}
+
+.info-block p,
+.info-block a {
+    margin: 15px 0;
+    color: #333;
+}
+
+.info-block a {
+    color: #00a1e0;
+    text-decoration: none;
+}
+
+.info-block a:hover {
+    text-decoration: underline;
+}
+
+/* Mobile styles */
+@media (max-width: 768px) {
+    .container-head {
+        font-size: 1.2em;
+        margin-top: 20px;
+    }
+
+    .contact-info {
+        flex-direction: column;
+        padding: 10px;
+        margin-top: 20px;
+    }
+
+    .info-block {
+        padding: 10px 0;
+        text-align: center;
+    }
+
+    .info-block i {
+        font-size: 24px;
+    }
+
+    .info-block p,
+    .info-block a {
+        margin: 10px 0;
+    }
+}
