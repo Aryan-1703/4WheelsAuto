@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
 import axios from "axios";
 import "../../styles/AppointmentRequest/ContactForm.css";
@@ -8,9 +8,9 @@ interface FormData {
 	name: string;
 	email: string;
 	phone: string;
-	subject: string;
+	service: string; // Changed from 'subject' to 'service'
 	message: string;
-	attachments?: FileList; // Add file list to form data type
+	attachments?: FileList;
 }
 
 const ContactForm: React.FC = () => {
@@ -19,14 +19,16 @@ const ContactForm: React.FC = () => {
 		handleSubmit,
 		formState: { errors, isSubmitting },
 		reset,
-		setValue,
 	} = useForm<FormData>();
+
+	const [message, setMessage] = useState<string>("");
+	const [selectedFiles, setSelectedFiles] = useState<FileList | null>(null);
 
 	// Handle file input change
 	const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
 		const files = event.target.files;
 		if (files) {
-			setValue("attachments", files, { shouldDirty: true });
+			setSelectedFiles(files);
 		}
 	};
 
@@ -35,15 +37,18 @@ const ContactForm: React.FC = () => {
 		const formData = new FormData();
 
 		// Append form data
-		(Object.keys(data) as Array<keyof FormData>).forEach(key => {
-			if (key === "attachments" && data[key]) {
-				Array.from(data[key] as FileList).forEach(file =>
-					formData.append("attachments", file)
-				);
-			} else {
-				formData.append(key, data[key] as string);
-			}
-		});
+		formData.append("name", data.name);
+		formData.append("email", data.email);
+		formData.append("phone", data.phone);
+		formData.append("service", data.service);
+		formData.append("message", data.message);
+
+		// Append files if any
+		if (selectedFiles) {
+			Array.from(selectedFiles).forEach(file => {
+				formData.append("attachments", file);
+			});
+		}
 
 		try {
 			const response = await axios.post(
@@ -51,13 +56,14 @@ const ContactForm: React.FC = () => {
 				formData,
 				{
 					headers: {
-						"Content-Type": "multipart/form-data", // Update content type
+						"Content-Type": "multipart/form-data",
 					},
 				}
 			);
 			setMessage(response.data);
 			setTimeout(() => {
 				reset();
+				setSelectedFiles(null); // Reset file input
 			}, 3500);
 		} catch (error) {
 			console.error("Error:", error);
@@ -65,64 +71,39 @@ const ContactForm: React.FC = () => {
 		}
 	};
 
-	const [message, setMessage] = React.useState<string>("");
-
 	return (
 		<form className="contact-form" onSubmit={handleSubmit(onSubmit)}>
-			<div className="input-group">
-				<input
-					type="text"
-					placeholder="Name"
-					{...register("name", { required: "Name is required" })}
-				/>
-				{errors.name && <p className="error">{errors.name.message}</p>}
+			{/* Form fields */}
+			<input type="text" placeholder="Name" {...register("name", { required: "Name is required" })} />
+			{errors.name && <p className="error">{errors.name.message}</p>}
 
-				<input
-					type="email"
-					placeholder="E-mail"
-					{...register("email", {
-						required: "E-mail is required",
-						pattern: {
-							value: /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/,
-							message: "Enter a valid e-mail address",
-						},
-					})}
-				/>
-				{errors.email && <p className="error">{errors.email.message}</p>}
+			<input type="email" placeholder="E-mail" {...register("email", {
+				required: "E-mail is required",
+				pattern: {
+					value: /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/,
+					message: "Enter a valid e-mail address",
+				},
+			})} />
+			{errors.email && <p className="error">{errors.email.message}</p>}
 
-				<input
-					type="tel"
-					placeholder="Phone"
-					{...register("phone", {
-						required: "Phone is required",
-						pattern: {
-							value: /^[0-9]{10}$/,
-							message: "Enter a valid phone number",
-						},
-					})}
-				/>
-				{errors.phone && <p className="error">{errors.phone.message}</p>}
-			</div>
+			<input type="tel" placeholder="Phone" {...register("phone", {
+				required: "Phone is required",
+				pattern: {
+					value: /^[0-9]{10}$/,
+					message: "Enter a valid phone number",
+				},
+			})} />
+			{errors.phone && <p className="error">{errors.phone.message}</p>}
 
-			<input
-				type="text"
-				placeholder="Subject"
-				{...register("subject", { required: "Subject is required" })}
-			/>
-			{errors.subject && <p className="error">{errors.subject.message}</p>}
+			<input type="text" placeholder="Service" {...register("service", { required: "Service is required" })} />
+			{errors.service && <p className="error">{errors.service.message}</p>}
 
-			<textarea
-				placeholder="Your message..."
-				{...register("message", { required: "Message is required" })}
-			/>
+			<textarea placeholder="Your message..." {...register("message", { required: "Message is required" })} />
 			{errors.message && <p className="error">{errors.message.message}</p>}
 
-			<input
-				type="file"
-				multiple
-				{...register("attachments")}
-				onChange={handleFileChange}
-			/>
+			<div>
+				<input type="file" multiple onChange={handleFileChange} />
+			</div>
 
 			<button type="submit" disabled={isSubmitting}>
 				{isSubmitting ? "Sending..." : "Send Message →"}

@@ -19,6 +19,9 @@ const Appointment: React.FC = () => {
 		reset,
 	} = useForm<FormData>();
 
+	const [message, setMessage] = React.useState("");
+	const [showDialog, setShowDialog] = React.useState(false);
+
 	const onSubmit: SubmitHandler<FormData> = async data => {
 		try {
 			const response = await axios.post(
@@ -43,9 +46,6 @@ const Appointment: React.FC = () => {
 			setMessage("An error occurred. Please try again later.");
 		}
 	};
-
-	const [message, setMessage] = React.useState("");
-	const [showDialog, setShowDialog] = React.useState(false);
 
 	return (
 		<div className="appointment-container">
