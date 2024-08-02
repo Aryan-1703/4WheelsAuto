@@ -43,7 +43,7 @@ const sendEmail = data => {
 			? attachments.map(file => ({
 					filename: file.originalname,
 					content: file.buffer,
-			  }))
+		}))
 			: [],
 	};
 
