@@ -73,40 +73,51 @@ const ContactForm: React.FC = () => {
 
 	return (
 		<form className="contact-form" onSubmit={handleSubmit(onSubmit)}>
-			{/* Form fields */}
-			<input type="text" placeholder="Name" {...register("name", { required: "Name is required" })} />
-			{errors.name && <p className="error">{errors.name.message}</p>}
+			<h2>Schedule Your Appointment</h2>
+			<div className="input-group">
+				<input
+					type="text"
+					placeholder="Name"
+					{...register("name", { required: "Name is required" })}
+				/>
+				{errors.name && <p className="error">{errors.name.message}</p>}
 
-			<input type="email" placeholder="E-mail" {...register("email", {
-				required: "E-mail is required",
-				pattern: {
-					value: /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/,
-					message: "Enter a valid e-mail address",
-				},
-			})} />
-			{errors.email && <p className="error">{errors.email.message}</p>}
+				<input
+					type="tel"
+					placeholder="Phone"
+					{...register("phone", {
+						required: "Phone is required",
+						pattern: {
+							value: /^[0-9]{10}$/,
+							message: "Enter a valid phone number",
+						},
+					})}
+				/>
+				{errors.phone && <p className="error">{errors.phone.message}</p>}
 
-			<input type="tel" placeholder="Phone" {...register("phone", {
-				required: "Phone is required",
-				pattern: {
-					value: /^[0-9]{10}$/,
-					message: "Enter a valid phone number",
-				},
-			})} />
-			{errors.phone && <p className="error">{errors.phone.message}</p>}
-
-			<input type="text" placeholder="Service" {...register("service", { required: "Service is required" })} />
-			{errors.service && <p className="error">{errors.service.message}</p>}
-
-			<textarea placeholder="Your message..." {...register("message", { required: "Message is required" })} />
-			{errors.message && <p className="error">{errors.message.message}</p>}
-
-			<div>
-				<input type="file" multiple onChange={handleFileChange} />
+				<input
+					type="email"
+					placeholder="Email"
+					{...register("email", {
+						required: "E-mail is required",
+						pattern: {
+							value: /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/,
+							message: "Enter a valid e-mail address",
+						},
+					})}
+				/>
+				{errors.email && <p className="error">{errors.email.message}</p>}
 			</div>
-
+			<textarea
+				placeholder="Case Description..."
+				{...register("message", { required: "Message is required" })}
+			/>
+			{errors.message && <p className="error">{errors.message.message}</p>}
+			<label>Attach photo/video</label>
+			<input type="file" multiple onChange={handleFileChange} />
+			<div className="recaptcha">{/* Include your reCAPTCHA component here */}</div>
 			<button type="submit" disabled={isSubmitting}>
-				{isSubmitting ? "Sending..." : "Send Message →"}
+				{isSubmitting ? "Sending..." : "Send →"}
 			</button>
 
 			{message && <p className="feedback-message">{message}</p>}

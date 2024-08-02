@@ -32,13 +32,13 @@ const Header: React.FC = () => {
 						<Link to="/contact" onClick={() => setIsMenuOpen(false)}>
 							CONTACT US
 						</Link>
-						<Link
+						{/* <Link
 							to="/appointment-request" 
 							className="make-appointment-btn"
 							onClick={() => setIsMenuOpen(false)}
 						>
 							Make Appointment
-						</Link>
+						</Link> */}
 					</nav>
 				</div>
 			</div>
