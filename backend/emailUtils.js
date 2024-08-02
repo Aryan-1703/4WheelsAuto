@@ -17,7 +17,7 @@ const sendEmail = data => {
 	const { name, email, phone, date, service, message, attachments } = data;
 
 	const mailOptions = {
-		from: `"Contact Form" <${process.env.SMTP_USER}>`,
+		from: `"Appointment Request" <${process.env.SMTP_USER}>`,
 		to: "fourwheelsauto@hotmail.com",
 		subject: `Request from ${name}`,
 		text: `You have received a new request from ${name}.\n\nDetails:\nName: ${name}\nEmail: ${email}\nPhone: ${phone}\nDate: ${
