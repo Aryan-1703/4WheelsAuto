@@ -216,6 +216,14 @@
 	.appointment-card p {
 		font-size: 0.9rem; /* Adjust font size for smaller screens */
 	}
+	.input-container {
+		width: 100%; /* Ensure container is full width on mobile */
+	}
+
+	#service-input {
+		width: 100%; /* Full width of its container */
+		box-sizing: border-box; /* Include padding and border in element’s total width and height */
+	}
 }
 
 @media (max-width: 480px) {
