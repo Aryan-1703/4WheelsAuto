@@ -1,61 +1,48 @@
-import nodemailer from "nodemailer";
+import express from "express";
+import path from "path";
 import dotenv from "dotenv";
+import cors from "cors";
+import multer from "multer";
+import { sendEmail } from "./emailUtils.js";
 
 dotenv.config();
 
-const transporter = nodemailer.createTransport({
-	host: process.env.SMTP_HOST,
-	port: process.env.SMTP_PORT,
-	secure: true,
-	auth: {
-		user: process.env.SMTP_USER,
-		pass: process.env.SMTP_PASS,
-	},
+const app = express();
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+app.use(
+    cors({
+        origin: "https://4wheelsautocollision.com",
+    })
+);
+
+// Configure multer for file uploads
+const upload = multer();
+
+app.post("/backend/api/send-email", upload.array('attachments'), async (req, res) => {
+    const { name, email, phone, date, service } = req.body;
+    const attachments = req.files;
+
+    try {
+        await sendEmail(name, email, phone, date, service, attachments);
+        res.send("Email sent successfully");
+    } catch (error) {
+        console.error("Error sending email:", error);
+        res.status(500).send("Error sending email");
+    }
 });
 
-const sendEmail = data => {
-	const { name, email, phone, date, service, message, attachments } = data;
+// Serve static files from the public_html directory
+const publicPath = path.join(__dirname, "..", "public_html");
+app.use(express.static(publicPath));
 
-	const mailOptions = {
-		from: `"Contact Form" <${process.env.SMTP_USER}>`,
-		to: "fourwheelsauto@hotmail.com",
-		subject: `Request from ${name}`,
-		text: `You have received a new request from ${name}.\n\nDetails:\nName: ${name}\nEmail: ${email}\nPhone: ${phone}\nDate: ${
-			date || "N/A"
-		}\nService: ${
-			service || "N/A"
-		}\nMessage: ${message}\n\nTo contact them, you can reply directly to this email.`,
-		html: `
-            <p><strong>New Request</strong></p>
-            <p>You have received a new request from <strong>${name}</strong>.</p>
-            <p><strong>Details:</strong></p>
-            <p><strong>Date:</strong> ${date || "N/A"}</p>
-            <p><strong>Service Requested:</strong> ${service || "N/A"}</p>
-            <p><strong>Message:</strong> ${message}</p>
-            <p><strong>Contact Information:</strong></p>
-            <p><strong>Phone:</strong> ${phone}</p>
-            <p><strong>Email:</strong> <a href="mailto:${email}">${email}</a></p>
-            <p>To contact them, simply click the email address above to send a direct reply.</p>
-            <p>Best regards,</p>
-            <strong>Request Manager</strong>
-        `,
-		attachments: attachments
-			? attachments.map(file => ({
-					filename: file.originalname,
-					content: file.buffer,
-		}))
-			: [],
-	};
+// Serve the main index.html file for any non-API route
+app.get("*", (req, res) => {
+    res.sendFile(path.join(publicPath, "index.html"));
+});
 
-	return new Promise((resolve, reject) => {
-		transporter.sendMail(mailOptions, (error, info) => {
-			if (error) {
-				reject(error);
-			} else {
-				resolve(info);
-			}
-		});
-	});
-};
-
-export { sendEmail };
+// Set the port from environment variables or default to 3001
+const PORT = process.env.PORT || 3001;
+app.listen(PORT, () => {
+    console.log(`Server is running on port ${PORT}`);
+});
