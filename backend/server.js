@@ -1,10 +1,10 @@
 import express from "express";
-0;
 import path from "path";
 import dotenv from "dotenv";
 import cors from "cors";
+import multer from "multer";
 import { sendEmail } from "./emailUtils.js";
-
+const upload = multer();
 dotenv.config();
 
 const app = express();
@@ -16,12 +16,12 @@ app.use(
 	})
 );
 
-// Handle POST request to /api/send-email
-app.post("/api/send-email", async (req, res) => {
+app.post("/backend/api/send-email", upload.array("attachments"), async (req, res) => {
 	const { name, email, phone, date, service } = req.body;
+	const attachments = req.files;
 
 	try {
-		await sendEmail(name, email, phone, date, service);
+		await sendEmail(name, email, phone, date, service, attachments);
 		res.send("Email sent successfully");
 	} catch (error) {
 		console.error("Error sending email:", error);
@@ -38,6 +38,8 @@ app.get("*", (req, res) => {
 	res.sendFile(path.join(publicPath, "index.html"));
 });
 
-app.listen(3001, () => {
-	console.log("Server is running on port 3001");
+// Set the port from environment variables or default to 3001
+const PORT = process.env.PORT || 3001;
+app.listen(PORT, () => {
+	console.log(`Server is running on port ${PORT}`);
 });

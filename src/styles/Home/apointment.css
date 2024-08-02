@@ -18,7 +18,7 @@
 	padding: 20px;
 	margin: 10px;
 	width: 45%;
-	height:400px;
+	height: 400px;
 }
 
 .form-card {
@@ -88,14 +88,14 @@
 
 #service-input {
 	width: 100%;
-	min-height: 40px;
+	height: 50px;
 	padding: 10px;
 	font-size: 16px;
 	box-sizing: border-box;
 	border: 1px solid #ccc;
 	border-radius: 4px;
 	resize: none;
-	overflow: hidden;
+	overflow-y: auto;
 }
 
 #service-input::placeholder {
@@ -215,6 +215,14 @@
 
 	.appointment-card p {
 		font-size: 0.9rem; /* Adjust font size for smaller screens */
+	}
+	.input-container {
+		width: 100%; /* Ensure container is full width on mobile */
+	}
+
+	#service-input {
+		width: 100%; /* Full width of its container */
+		box-sizing: border-box; /* Include padding and border in element’s total width and height */
 	}
 }
 

@@ -102,6 +102,7 @@ const Appointment: React.FC = () => {
 					</div>
 					<div className="input-container">
 						<textarea
+							id="service-input"
 							{...register("service", { required: "Service needed is required" })}
 							placeholder="Service Needed"
 							className={`service-input ${errors.service ? "invalid" : ""}`}

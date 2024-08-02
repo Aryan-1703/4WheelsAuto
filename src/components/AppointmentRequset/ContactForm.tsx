@@ -10,6 +10,7 @@ interface FormData {
 	phone: string;
 	subject: string;
 	message: string;
+	attachments?: FileList; // Add file list to form data type
 }
 
 const ContactForm: React.FC = () => {
@@ -18,25 +19,44 @@ const ContactForm: React.FC = () => {
 		handleSubmit,
 		formState: { errors, isSubmitting },
 		reset,
+		setValue,
 	} = useForm<FormData>();
 
+	// Handle file input change
+	const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+		const files = event.target.files;
+		if (files) {
+			setValue("attachments", files, { shouldDirty: true });
+		}
+	};
+
+	// Handle form submission
 	const onSubmit: SubmitHandler<FormData> = async data => {
+		const formData = new FormData();
+
+		// Append form data
+		(Object.keys(data) as Array<keyof FormData>).forEach(key => {
+			if (key === "attachments" && data[key]) {
+				Array.from(data[key] as FileList).forEach(file =>
+					formData.append("attachments", file)
+				);
+			} else {
+				formData.append(key, data[key] as string);
+			}
+		});
+
 		try {
 			const response = await axios.post(
 				"https://4wheelsautocollision.com/backend/api/send-email",
-				data,
+				formData,
 				{
 					headers: {
-						"Content-Type": "application/json",
+						"Content-Type": "multipart/form-data", // Update content type
 					},
 				}
 			);
 			setMessage(response.data);
-			// setShowDialog(true);
-
-			// Hide dialog after 2 seconds
 			setTimeout(() => {
-				// setShowDialog(false);
 				reset();
 			}, 3500);
 		} catch (error) {
@@ -96,6 +116,13 @@ const ContactForm: React.FC = () => {
 				{...register("message", { required: "Message is required" })}
 			/>
 			{errors.message && <p className="error">{errors.message.message}</p>}
+
+			<input
+				type="file"
+				multiple
+				{...register("attachments")}
+				onChange={handleFileChange}
+			/>
 
 			<button type="submit" disabled={isSubmitting}>
 				{isSubmitting ? "Sending..." : "Send Message →"}

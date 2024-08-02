@@ -13,25 +13,31 @@ const transporter = nodemailer.createTransport({
 	},
 });
 
-export const sendEmail = (name, email, phone, date, service) => {
+const sendEmail = (name, email, phone, date, service, attachments) => {
 	const mailOptions = {
 		from: `"Appointment" <${process.env.SMTP_USER}>`,
-		to: "aryan17032@gmail.com",
+		to: "fourwheelsauto@hotmail.com",
 		subject: `Appointment Request from ${name}`,
 		text: `You have received a new appointment request from ${name}.\n\nDetails:\nName: ${name}\nEmail: ${email}\nPhone: ${phone}\nDate: ${date}\nService: ${service}\n\nTo contact them, you can reply directly to this email.`,
 		html: `
-			<p><strong>New Appointment Request</strong></p>
-			<p>You have received a new appointment request from <strong>${name}</strong>.</p>
-			<p><strong>Details:</strong></p>
-			<p><strong>Date:</strong> ${date}</p>
-			<p><strong>Service Requested:</strong> ${service}</p>
-			<p><strong>Contact Information:</strong></p>
+            <p><strong>New Appointment Request</strong></p>
+            <p>You have received a new appointment request from <strong>${name}</strong>.</p>
+            <p><strong>Details:</strong></p>
+            <p><strong>Date:</strong> ${date}</p>
+            <p><strong>Service Requested:</strong> ${service}</p>
+            <p><strong>Contact Information:</strong></p>
             <p><strong>Phone:</strong> ${phone}</p>
-			<p><strong>Email:</strong> <a href="mailto:${email}">${email}</a></p>
-		    <p>To contact them, simply click the email address above to send a direct reply.</p>
-			<p>Best regards,</p>
-			<strong>Appointment Manager - Aryan</strong>
-		`,
+            <p><strong>Email:</strong> <a href="mailto:${email}">${email}</a></p>
+            <p>To contact them, simply click the email address above to send a direct reply.</p>
+            <p>Best regards,</p>
+            <strong>Appointment Manager - Aryan</strong>
+        `,
+		attachments: attachments
+			? attachments.map(file => ({
+				filename: file.originalname,
+				content: file.buffer,
+			}))
+			: [],
 	};
 
 	return new Promise((resolve, reject) => {
@@ -44,3 +50,5 @@ export const sendEmail = (name, email, phone, date, service) => {
 		});
 	});
 };
+
+export { sendEmail };
