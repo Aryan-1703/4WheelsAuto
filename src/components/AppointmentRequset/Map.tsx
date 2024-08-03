@@ -18,11 +18,11 @@ const Mapdiv = () => {
 					style={{ width: "100vw", height: "400px" }}
 					defaultCenter={position}
 					defaultZoom={15}
-					gestureHandling={"greedy"}
+					gestureHandling={"cooperative"}
 					disableDefaultUI={true}
 					mapTypeId={mapType}
 				>
-					<Marker position={position} title="4Wheels Auto Collision" />
+					<Marker position={position}  title="4Wheels Auto Collision" />
 				</Map>
 			</APIProvider>
 			<div className="map-toggle-images">

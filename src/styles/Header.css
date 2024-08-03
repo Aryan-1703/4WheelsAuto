@@ -1,20 +1,14 @@
-.contact-info {
-	display: flex;
-	flex-wrap: wrap;
+.header {
+	position: fixed;
+	top: 0;
+	width: 100%;
+	background-color: #333;
+	transition: top 0.3s ease-in-out;
+	z-index: 1000;
 }
 
-.contact-info span {
-	margin-right: 15px;
-	margin-bottom: 5px;
-}
-
-.social-links {
-	display: flex;
-	align-items: center;
-}
-
-.social-links span {
-	margin-left: 15px;
+.hidden-header {
+	top: -100px;
 }
 
 .main-header {
@@ -24,39 +18,17 @@
 	padding: 15px 20px;
 }
 
-.company-name {
-	display: flex;
-	flex-direction: column;
-	align-items: flex-start;
-}
-
-.title {
-	font-size: 2rem;
-	line-height: 1.2;
-	color: white;
-}
-
-.title span {
-	display: block;
-}
-
-.collision {
-	color: #ff5722;
-	font-size: 1.5rem;
-}
-
-.nav-container {
+.company-name .title {
 	display: flex;
 	align-items: center;
 }
 
-.nav-links {
-	display: flex;
-	align-items: center;
-	margin-right: 20px;
+.logo-image {
+	width: auto; /* Maintain aspect ratio */
+	height: 70px; /* Adjust this value based on your needs */
 }
 
-.nav-links a {
+.nav-container .nav-links a {
 	color: white;
 	text-decoration: none;
 	margin: 0 15px;
@@ -68,132 +40,43 @@
 	color: #ff5722;
 }
 
-.make-appointment-btn {
-	background-color: transparent;
-	border: 1px solid white;
-	color: white;
-	padding: 10px 20px;
-	text-decoration: none;
-	transition: background-color 0.3s, color 0.3s;
-}
-
-.make-appointment-btn:hover {
-	background-color: transparent;
-	color: #ff5722;
-	border: 1px solid #ff5722;
-}
-
-/* Mobile Styles */
-@media (max-width: 768px) {
-	.top-bar {
-		flex-direction: column;
-		align-items: flex-start;
-	}
-
-	.contact-info {
-		flex-direction: column;
-		align-items: flex-start;
-	}
-
-	.contact-info span {
-		margin-right: 0;
-		margin-bottom: 5px;
-	}
-
-	.social-links {
-		margin-top: 10px;
-		flex-direction: column;
-		align-items: flex-start;
-	}
-
-	.social-links span {
-		margin-left: 0;
-		margin-bottom: 5px;
-	}
-
-	.nav-container {
-		flex-direction: column;
-		align-items: flex-start;
-	}
-
-	.nav-links {
-		margin-right: 0;
-		margin-bottom: 10px;
-		flex-direction: column;
-	}
-
-	.nav-links a {
-		margin: 5px 0;
-	}
-
-	.make-appointment-btn {
-		width: 60%;
-		text-align: center;
-	}
-}
-
-@media (max-width: 480px) {
-	.title {
-		font-size: 1.5rem;
-	}
-
-	.collision {
-		font-size: 1.2rem;
-	}
-}
-
-.contact-info a {
-	color: white;
-	text-decoration: none;
-	transition: color 0.3s;
-}
-
-.contact-info a:hover {
-	color: #ff5722;
-}
-/* Menu Toggle Button Styles */
 .menu-toggle {
-	display: none; /* Hidden by default */
+	display: none;
 	background: transparent;
 	border: none;
 	color: white;
 	font-size: 1.5rem;
 	cursor: pointer;
-	z-index: 1001; /* Ensure it is above other content */
-	position: relative; /* Ensure it's positioned correctly */
+	z-index: 1001;
+	position: relative;
 }
 
-/* Mobile Styles */
 @media (max-width: 768px) {
-	.nav-container {
-		position: relative; /* Positioning context for absolute child */
-	}
-
-	.menu-toggle {
-		display: block; /* Show the toggle button on small screens */
-		margin-left: auto; /* Align it to the right */
+	.nav-container .menu-toggle {
+		display: block;
+		margin-left: auto;
 	}
 
 	.nav-links {
-		display: flex; /* Use flexbox for alignment */
+		display: flex;
 		flex-direction: column;
-		width: 80%; /* Width of the sliding menu */
-		height: 100vh; /* Full viewport height */
-		position: fixed; /* Fixed position to cover the screen */
+		width: 80%;
+		height: 100vh;
+		position: fixed;
 		top: 0;
-		right: 0; /* Align to the right */
-		background-color: rgba(0, 0, 0, 0.9); /* Dark background for dropdown */
+		right: 0;
+		background-color: rgba(0, 0, 0, 0.9);
 		padding: 20px;
 		box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 		transition: transform 0.3s ease-in-out;
-		transform: translateX(100%); /* Initially hide the menu off-screen */
-		z-index: 1000; /* Ensure dropdown is above other content */
-		justify-content: center; /* Center items vertically */
-		align-items: center; /* Center items horizontally */
+		transform: translateX(100%);
+		z-index: 1000;
+		justify-content: center;
+		align-items: center;
 	}
 
 	.nav-links.open {
-		transform: translateX(0); /* Slide in from the right */
+		transform: translateX(0);
 	}
 
 	.nav-links a {
@@ -201,19 +84,12 @@
 		padding: 15px;
 		text-align: center;
 		color: white;
-		font-size: 1.5rem; /* Adjust font size for readability */
-		text-decoration: none;
+		font-size: 1.5rem;
 		transition: background-color 0.3s, color 0.3s;
 	}
 
 	.nav-links a:hover {
 		background-color: #ff5722;
 		color: white;
-	}
-
-	.make-appointment-btn {
-		margin-top: auto; /* Push button to the bottom of the menu */
-		padding: 15px 20px;
-		border: 1px solid white;
 	}
 }
