@@ -4,8 +4,18 @@ import "../styles/Home/Home.css";
 import Whyus from "../components/Home/whyus";
 import Gallery from "../components/Home/gallery";
 import Process from "../components/Home/Process";
+import { useRef } from "react";
+
 
 const Home = () => {
+	const appointmentRef = useRef<HTMLDivElement>(null);
+
+	const handleScrollToAppointment = () => {
+		if (appointmentRef.current) {
+			appointmentRef.current.scrollIntoView({ behavior: "smooth" });
+		}
+	};
+
 	return (
 		<div>
 			<div className="home-start">
@@ -20,16 +30,21 @@ const Home = () => {
 							deal directly with the insurance companies so you don’t have to. At 4Wheels
 							Auto Collision, your safety and satisfaction are our main priorities.
 						</p>
-						<button className="appointmentbtn">RESERVE APPOINTMENT</button>
+						<button className="appointmentbtn" onClick={handleScrollToAppointment}>
+							RESERVE APPOINTMENT
+						</button>
 					</div>
 				</div>
 			</div>
 			<Whyus />
 			<ServiceOverview />
-			<Appointment />
+			<div ref={appointmentRef}>
+				<Appointment />
+			</div>
 			<Gallery />
 			<Process />
 		</div>
 	);
 };
+
 export default Home;
