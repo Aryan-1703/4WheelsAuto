@@ -22,7 +22,7 @@ const Mapdiv = () => {
 					disableDefaultUI={true}
 					mapTypeId={mapType}
 				>
-					<Marker position={position}  title="4Wheels Auto Collision" />
+					<Marker position={position} title="4Wheels Auto Collision" />
 				</Map>
 			</APIProvider>
 			<div className="map-toggle-images">
