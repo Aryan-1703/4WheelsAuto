@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import "../styles/Header.css";
 
-
 const Header: React.FC = () => {
 	const [isMenuOpen, setIsMenuOpen] = useState(false);
 	const toggleMenu = () => {
@@ -14,7 +13,13 @@ const Header: React.FC = () => {
 			<div className="main-header">
 				<div className="company-name">
 					<div className="title">
-						<img src="../images/4Wheelsauto.png" alt="4Wheels Auto Collision" className="logo-image" />
+						<Link to="/">
+							<img
+								src="../images/4Wheelsauto.png"
+								alt="4Wheels Auto Collision"
+								className="logo-image"
+							/>
+						</Link>
 					</div>
 				</div>
 				<div className="nav-container">
