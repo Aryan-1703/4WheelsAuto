@@ -18,7 +18,10 @@
 	padding: 20px;
 	margin: 10px;
 	width: 45%;
-	height: 400px;
+	height: auto; /* Adjust height based on content */
+	display: flex;
+	flex-direction: column; /* Stack items vertically */
+	justify-content: space-between; /* Space between form and button */
 }
 
 .form-card {
@@ -40,7 +43,8 @@
 
 .appointment-card form {
 	display: flex;
-	flex-direction: column;
+	flex-direction: column; /* Stack form elements vertically */
+	flex-grow: 1; /* Allow form to grow and fill available space */
 }
 
 .form-row {
@@ -64,7 +68,8 @@
 	background-color: #ff6600;
 	color: #fff;
 	cursor: pointer;
-	width: 100%;
+	width: 100%; /* Full width for better fit inside the card */
+	box-sizing: border-box; /* Include padding and border in the element’s total width and height */
 }
 
 .appointment-card button:hover {
@@ -164,36 +169,15 @@
 
 /* Responsive adjustments for smaller screens */
 @media (max-width: 768px) {
-	.dialog {
-		max-width: 95%; /* Increase width for smaller screens */
-		padding: 15px; /* Adjust padding */
-		font-size: 1.2rem; /* Adjust font size */
-	}
-}
-
-@media (max-width: 480px) {
-	.dialog {
-		max-width: 95%; /* Increase width for very small screens */
-		padding: 10px; /* Adjust padding */
-		font-size: 1rem; /* Adjust font size */
-	}
-}
-
-.invalid {
-	border-color: red;
-}
-
-/* Media queries for mobile responsiveness */
-@media (max-width: 768px) {
 	.appointment-container {
 		height: auto; /* Allow height to adjust based on content */
-		padding: 20px; /* Add padding for smaller screens */
+		padding: 40px; /* Add padding for smaller screens */
 		flex-direction: column; /* Stack cards vertically on smaller screens */
 	}
 
 	.appointment-card {
 		width: 90%; /* Increase card width for better fit on smaller screens */
-		margin: 10px auto; /* Center cards horizontally */
+		margin: 40px auto; /* Center cards horizontally */
 	}
 
 	.form-row {
@@ -216,6 +200,7 @@
 	.appointment-card p {
 		font-size: 0.9rem; /* Adjust font size for smaller screens */
 	}
+
 	.input-container {
 		width: 100%; /* Ensure container is full width on mobile */
 	}
@@ -242,4 +227,8 @@
 	.appointment-card p {
 		font-size: 0.8rem; /* Further adjust font size for very small screens */
 	}
+}
+
+.invalid {
+	border-color: red;
 }

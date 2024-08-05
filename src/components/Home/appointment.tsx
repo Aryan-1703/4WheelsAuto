@@ -64,7 +64,6 @@ const Appointment: React.FC = () => {
 							className={`name-input ${errors.name ? "invalid" : ""}`}
 						/>
 						{errors.name && <span className="error-message">{errors.name.message}</span>}
-
 						<input
 							type="email"
 							{...register("email", {
@@ -91,7 +90,6 @@ const Appointment: React.FC = () => {
 						{errors.phone && (
 							<span className="error-message">{errors.phone.message}</span>
 						)}
-
 						<input
 							type="date"
 							{...register("date", { required: "Date is required" })}
